@@ -34,6 +34,12 @@ jobs:
       # 4. Ejecutar el scraper (falla el job si el BCV no responde:
       #    así el json conserva el valor anterior y el sitio usa fallback)
       - name: Scrapear tasa del BCV
+        env:
+          # El servidor del BCV NO envia la cadena de certificados SSL
+          # completa (falta el intermedio), por lo que la verificacion
+          # falla incluso en los runners de GitHub. Dato 100% publico con
+          # parseo estricto + validacion de rango: se desactiva SOLO aqui.
+          BCV_SSL_INSEGURO: "1"
         run: python scripts/scrape_bcv.py
 
       # 5. Commit y push solo si algo cambió (bcv.json o config.js)

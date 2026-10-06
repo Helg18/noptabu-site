@@ -113,8 +113,11 @@ def actualizar_fallback_config(tasa):
 
 def main():
     tasa = obtener_tasa()
-    if tasa <= 0:
-        raise RuntimeError(f"Tasa inválida obtenida: {tasa}")
+    # Validacion de rango: la tasa BCV debe ser un valor plausible.
+    # Si el parseo extrajera basura (pagina de error, mantenimiento, etc.),
+    # esto lo detecta y NO toca bcv.json.
+    if not (1 <= tasa <= 1_000_000):
+        raise RuntimeError(f"Tasa fuera de rango plausible: {tasa}")
 
     hoy = datetime.datetime.now(
         datetime.timezone(datetime.timedelta(hours=-4))).date().isoformat()
