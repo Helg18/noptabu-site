@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<!-- ===== HEAD: SEO, Open Graph, fuentes y hoja de estilos ===== -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo al detal · NOPTABÚ</title>
+    <meta name="description" content="Catálogo al detal de NOPTABÚ: juguetes, lencería y bienestar para adultos. Precios en dólares y bolívares a tasa BCV. Pide por WhatsApp.">
+    <meta name="theme-color" content="#0d0d12">
+    <!-- Open Graph para compartir en redes sociales -->
+    <meta property="og:title" content="Catálogo al detal · NOPTABÚ">
+    <meta property="og:description" content="Catálogo al detal de NOPTABÚ: juguetes, lencería y bienestar para adultos. Precios en dólares y bolívares a tasa BCV. Pide por WhatsApp.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="assets/img/logo.jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Favicon y manifest PWA -->
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <link rel="manifest" href="manifest.json">
+    <!-- Tipografías: Playfair Display (títulos) + Inter (cuerpo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <!-- Hoja de estilos principal -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<!-- data-agegate: esta página exige confirmar mayoría de edad al entrar -->
+<body data-page="catalogo" data-agegate>
+    <!-- Enlace de accesibilidad para lectores de pantalla -->
+    <a href="#contenido" class="salto-contenido" data-i18n="common.skip"></a>
+
+<!-- ===== HEADER: logo, navegación, selectores y carrito ===== -->
+    <header class="header">
+        <div class="contenedor header-contenedor">
+            <!-- Logo oficial (no modificado, solo reubicado) -->
+            <a href="index.html" aria-label="Noptabu - Inicio">
+                <img src="assets/img/logo.jpeg" alt="Noptabu" class="logo" width="180" height="44">
+            </a>
+            <!-- Botón hamburguesa (visible solo en móvil) -->
+            <button id="menu-toggle" class="menu-toggle" aria-label="Menú" aria-expanded="false">
+                <span></span><span></span><span></span>
+            </button>
+            <!-- Navegación principal -->
+            <nav class="nav-principal" id="nav-principal" aria-label="Navegación principal">
+                <ul>
+                    <li><a href="index.html" class="" data-i18n="nav.inicio"></a></li>
+                    <li><a href="catalogo.html" class="activo" data-i18n="nav.catalogo"></a></li>
+                    <li><a href="pagos.html" class="" data-i18n="nav.pagos"></a></li>
+                    <li><a href="envios.html" class="" data-i18n="nav.envios"></a></li>
+                    <li><a href="politicas.html" class="" data-i18n="nav.politicas"></a></li>
+                    <li><a href="contacto.html" class="" data-i18n="nav.contacto"></a></li>
+                </ul>
+            </nav>
+            <!-- Acciones: selector de idioma, moneda y carrito -->
+            <div class="acciones-header">
+                <select id="selector-idioma" class="selector-header" aria-label="Idioma">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+                <select id="selector-moneda" class="selector-header" aria-label="Moneda">
+                    <option value="usd" data-i18n="common.usd"></option>
+                    <option value="ves" data-i18n="common.ves"></option>
+                    <option value="both" data-i18n="common.both"></option>
+                </select>
+                <button id="btn-carrito" class="btn-carrito" aria-label="Carrito">
+                    <svg viewBox="0 0 24 24" width="20" height="20" fill="none"
+                         stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <circle cx="9" cy="20" r="1.5"/><circle cx="17" cy="20" r="1.5"/>
+                        <path d="M3 3h2l2.4 12.4a1.5 1.5 0 0 0 1.5 1.1h7.9a1.5 1.5 0 0 0 1.5-1.2L20 8H6"/>
+                    </svg>
+                    <span id="contador-carrito" class="contador-carrito oculto">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== CONTENIDO PRINCIPAL DE LA PÁGINA ===== -->
+    <main id="contenido">
+        <!-- ===== HERO INTERNO DEL CATÁLOGO ===== -->
+        <section class="pagina-hero">
+            <div class="contenedor">
+                <h1 class="titulo-seccion" data-i18n="catalogo.titulo"></h1>
+                <p class="subtitulo-seccion" data-i18n="catalogo.subtitulo"></p>
+            </div>
+        </section>
+
+        <!-- ===== CATÁLOGO: buscador, filtros y grid de productos ===== -->
+        <section class="seccion" style="padding-top:0">
+            <div class="contenedor">
+                <!-- Buscador en tiempo real -->
+                <div class="catalogo-herramientas">
+                    <input autocomplete="off" type="search" id="buscador" class="buscador"
+                           data-i18n-ph="catalogo.buscar_ph" aria-label="Buscar">
+                    <!-- Filtros por categoría (pintados por js/catalog.js) -->
+                    <div id="filtro-categorias" class="filtro-categorias"></div>
+                </div>
+                <!-- Grid de productos al detal -->
+                <div class="catalogo-grid" data-catalogo data-modo="detal"></div>
+            </div>
+        </section>
+    </main>
+
+<!-- ===== FOOTER: marca, enlaces, contacto y tasa BCV ===== -->
+    <footer class="footer">
+        <div class="contenedor">
+            <div class="footer-grid">
+                <!-- Columna 1: marca -->
+                <div class="footer-col">
+                    <img src="assets/img/logo.jpeg" alt="Noptabu" class="logo" loading="lazy">
+                    <p data-i18n="hero.subtitulo"></p>
+                </div>
+                <!-- Columna 2: enlaces del sitio -->
+                <div class="footer-col">
+                    <h3 data-i18n="footer.enlaces"></h3>
+                    <ul>
+                        <li><a href="catalogo.html" data-i18n="nav.catalogo"></a></li>
+                        <li><a href="mayoreo.html" data-i18n="nav.mayoreo"></a></li>
+                        <li><a href="pagos.html" data-i18n="nav.pagos"></a></li>
+                        <li><a href="envios.html" data-i18n="nav.envios"></a></li>
+                        <li><a href="politicas.html" data-i18n="nav.politicas"></a></li>
+                    </ul>
+                </div>
+                <!-- Columna 3: contacto rápido -->
+                <div class="footer-col">
+                    <h3 data-i18n="footer.contacto_t"></h3>
+                    <ul>
+                        <li><a href="contacto.html" data-i18n="nav.contacto"></a></li>
+                        <li><a href="mailto:noptabu@gmail.com">noptabu@gmail.com</a></li>
+                        <li><a href="https://api.whatsapp.com/send?phone=584146693604" target="_blank" rel="noopener">WhatsApp</a></li>
+                    </ul>
+                    <!-- Redes sociales oficiales de NOPTABÚ -->
+                    <div class="social-iconos">
+                        <a href="https://instagram.com/noptabu" target="_blank" rel="noopener"
+                           class="social-icono" aria-label="Instagram @noptabu"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+                        <a href="https://tiktok.com/@noptabu1" target="_blank" rel="noopener"
+                           class="social-icono" aria-label="TikTok @noptabu1"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M9 17.5V6.5l10-2v11"/><circle cx="6.5" cy="17.5" r="2.5"/><circle cx="16.5" cy="15.5" r="2.5"/></svg></a>
+                    </div>
+                </div>
+                <!-- Columna 4: tasa BCV -->
+                <div class="footer-col">
+                    <div class="footer-bcv">
+                        <strong data-i18n="footer.bcv_texto"></strong>
+                        <!-- Tasa y fecha escritas por js/main.js -->
+                        <span id="bcv-info">Tasa BCV: —</span>
+                        <span id="bcv-fecha"></span>
+                    </div>
+                </div>
+            </div>
+            <!-- Línea final: copyright y nota técnica -->
+            <div class="footer-final">
+                <span>© <span id="anio">2026</span> NOPTABÚ · <span data-i18n="footer.derechos"></span></span>
+            </div>
+        </div>
+    </footer>
+    <!-- ===== BOTÓN FLOTANTE DE WHATSAPP (esquina inferior derecha) ===== -->
+    <a id="btn-whatsapp" class="btn-whatsapp" href="#" target="_blank" rel="noopener"
+       aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor" aria-hidden="true">
+            <path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.14-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.11 3.22 5.1 4.51.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.05 21.8h-.01a9.87 9.87 0 0 1-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.9-9.88a9.83 9.83 0 0 1 9.88 9.9c0 5.44-4.44 9.87-9.89 9.87M20.5 3.5A11.8 11.8 0 0 0 12.05 0C5.5 0 .16 5.33.16 11.89c0 2.1.55 4.14 1.59 5.95L.05 24l6.3-1.65a11.9 11.9 0 0 0 5.68 1.45h.01c6.55 0 11.89-5.33 11.89-11.89 0-3.18-1.24-6.16-3.43-8.41"/>
+        </svg>
+        <span class="wa-texto">WhatsApp</span>
+    </a>
+
+<!-- ===== OVERLAY OSCURO (compartido por carrito y modales) ===== -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- ===== PANEL LATERAL DEL CARRITO ===== -->
+    <aside id="carrito-panel" class="carrito-panel" aria-label="Carrito de compras">
+        <div class="carrito-cabecera">
+            <h2 data-i18n="cart.titulo"></h2>
+            <button id="carrito-cerrar" class="btn-cerrar" aria-label="Cerrar">✕</button>
+        </div>
+        <!-- Ítems del carrito (pintados por js/cart.js) -->
+        <div id="carrito-items" class="carrito-items"></div>
+        <!-- Pie: modo, totales en $ y Bs, y botones -->
+        <div class="carrito-pie">
+            <div class="carrito-modo-fila">
+                <span data-i18n="cart.modo"></span>
+                <strong id="carrito-modo">—</strong>
+            </div>
+            <div class="carrito-totales">
+                <div class="fila-total"><span data-i18n="cart.total_usd"></span><span id="carrito-total-usd">$ 0.00</span></div>
+                <div class="fila-total grande"><span data-i18n="cart.total_ves"></span><span id="carrito-total-ves">Bs 0,00</span></div>
+            </div>
+            <div class="carrito-botones">
+                <button id="btn-vaciar" class="btn btn-fantasma" data-i18n="cart.vaciar"></button>
+                <button id="btn-checkout" class="btn btn-primario" data-i18n="cart.checkout"></button>
+            </div>
+        </div>
+    </aside>
+<!-- ===== MODAL: CONFIRMACIÓN DE MAYORÍA DE EDAD ===== -->
+    <div id="modal-edad" class="modal" role="dialog" aria-modal="true" aria-labelledby="edad-titulo">
+        <div class="modal-fondo"></div>
+        <div class="modal-caja modal-centrado">
+            <img src="assets/img/logo.jpeg" alt="Noptabu" class="logo">
+            <h2 id="edad-titulo" data-i18n="agegate.titulo"></h2>
+            <p data-i18n="agegate.texto"></p>
+            <div class="modal-botones">
+                <button id="edad-entrar" class="btn btn-primario" data-i18n="agegate.entrar"></button>
+                <button id="edad-salir" class="btn btn-fantasma" data-i18n="agegate.salir"></button>
+            </div>
+            <p class="modal-aviso" data-i18n="agegate.aviso"></p>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: CHECKOUT (sin pasarela: envío por WhatsApp) ===== -->
+    <div id="modal-checkout" class="modal" role="dialog" aria-modal="true" aria-labelledby="co-titulo">
+        <div class="modal-fondo"></div>
+        <div class="modal-caja">
+            <button class="btn-cerrar" data-cerrar-modal aria-label="Cerrar">✕</button>
+            <h2 id="co-titulo" data-i18n="checkout.titulo"></h2>
+            <p data-i18n="checkout.subtitulo" style="margin-bottom:1.2rem"></p>
+            <!-- Resumen del pedido (pintado por js/cart.js) -->
+            <h3 style="font-size:.9rem;margin-bottom:.5rem" data-i18n="checkout.resumen"></h3>
+            <div id="co-resumen" class="co-resumen"></div>
+            <div class="co-totales">
+                <div class="fila"><span data-i18n="checkout.modo"></span><span id="co-modo">—</span></div>
+                <div class="fila grande"><span data-i18n="checkout.total"></span><span id="co-total-usd">$ 0.00</span></div>
+                <div class="fila grande"><span>Bs</span><span id="co-total-ves">Bs 0,00</span></div>
+            </div>
+            <!-- Datos del cliente -->
+            <form id="form-checkout" onsubmit="return false">
+                <div class="campo">
+                    <label for="co-nombre" data-i18n="checkout.nombre"></label>
+                    <input autocomplete="off" type="text" id="co-nombre" required data-i18n-ph="checkout.nombre_ph">
+                </div>
+                <div class="campo">
+                    <label for="co-telefono" data-i18n="checkout.telefono"></label>
+                    <input autocomplete="off" type="tel" id="co-telefono" inputmode="tel" required data-i18n-ph="checkout.telefono_ph">
+                </div>
+                <div class="campo">
+                    <label for="co-entrega" data-i18n="checkout.entrega"></label>
+                    <select id="co-entrega">
+                        <option value="retiro" data-i18n="checkout.retiro_tienda"></option>
+                        <option value="envio" data-i18n="checkout.envio_domicilio"></option>
+                    </select>
+                </div>
+                <!-- Dirección: solo visible cuando elige envío a domicilio -->
+                <div class="campo oculto" id="co-direccion-grupo">
+                    <label for="co-direccion" data-i18n="checkout.direccion"></label>
+                    <input autocomplete="off" type="text" id="co-direccion" data-i18n-ph="checkout.direccion_ph">
+                </div>
+                <div class="campo">
+                    <label for="co-notas" data-i18n="checkout.notas"></label>
+                    <textarea autocomplete="off" id="co-notas" data-i18n-ph="checkout.notas_ph"></textarea>
+                </div>
+                <div class="modal-botones">
+                    <button id="btn-enviar-wa" class="btn btn-primario" data-i18n="checkout.enviar"></button>
+                    <button class="btn btn-fantasma" data-cerrar-modal data-i18n="checkout.cancelar"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ===== MODAL: VISTA RÁPIDA DE PRODUCTO ===== -->
+    <div id="modal-producto" class="modal" role="dialog" aria-modal="true" aria-labelledby="mp-nombre">
+        <div class="modal-fondo"></div>
+        <div class="modal-caja grande">
+            <button class="btn-cerrar" data-cerrar-modal aria-label="Cerrar">✕</button>
+            <div class="producto-detalle">
+                <img id="mp-img" src="assets/img/placeholder-producto.svg" alt="">
+                <div class="producto-detalle-info">
+                    <span class="tarjeta-categoria" id="mp-categoria"></span>
+                    <h3 id="mp-nombre"></h3>
+                    <p id="mp-descripcion"></p>
+                    <div class="tarjeta-precios">
+                        <span class="precio precio-usd" id="mp-precio-usd"></span>
+                        <span class="precio precio-ves" id="mp-precio-ves"></span>
+                    </div>
+                    <div class="cantidad-selector">
+                        <button id="mp-menos" class="btn-cantidad" aria-label="Menos">−</button>
+                        <input autocomplete="off" type="number" id="mp-cantidad" value="1" min="1" max="99"
+                               aria-label="Cantidad">
+                        <button id="mp-mas" class="btn-cantidad" aria-label="Más">+</button>
+                    </div>
+                    <button id="mp-agregar" class="btn btn-primario" data-i18n="common.agregar_carrito"></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOAST: avisos breves (agregado, errores, etc.) ===== -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!-- ===== SCRIPTS (orden de dependencia) ===== -->
+    <script src="js/config.js"></script>
+    <script src="js/i18n.js"></script>
+    <script src="js/bcv.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/catalog.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

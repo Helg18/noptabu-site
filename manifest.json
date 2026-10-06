@@ -1,0 +1,16 @@
+{
+  "name": "NOPTABÚ · Tienda para adultos",
+  "short_name": "Noptabu",
+  "description": "Juguetes, lencería y bienestar para adultos. Detal y mayoreo con envíos discretos en Venezuela.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d0d12",
+  "theme_color": "#0d0d12",
+  "icons": [
+    {
+      "src": "assets/img/favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    }
+  ]
+}

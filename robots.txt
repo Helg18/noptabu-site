@@ -1,0 +1,7 @@
+# robots.txt de NOPTABÚ
+# Permite todo el sitio excepto la carpeta de datos (JSON internos)
+User-agent: *
+Allow: /
+Disallow: /data/
+
+Sitemap: https://helg18.github.io/noptabu-site/sitemap.xml

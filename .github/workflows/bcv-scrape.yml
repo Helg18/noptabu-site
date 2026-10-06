@@ -1,0 +1,46 @@
+# =============================================================================
+# WORKFLOW: Actualización diaria de la tasa BCV
+# -----------------------------------------------------------------------------
+# GitHub Actions corre este scraping en el servidor de GitHub (sin CORS),
+# actualiza data/bcv.json y hace commit al repo. El sitio (100% estático)
+# solo lee ese archivo. También se puede disparar manualmente desde la
+# pestaña "Actions" del repositorio.
+# =============================================================================
+name: Actualizar tasa BCV
+
+on:
+  schedule:
+    - cron: "0 12 * * *"      # 12:00 UTC = 8:00 AM (hora Venezuela, UTC-4)
+  workflow_dispatch:          # Ejecución manual opcional
+
+permissions:
+  contents: write             # Permiso para hacer push del commit
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      # 1. Descargar el código del repositorio
+      - uses: actions/checkout@v4
+
+      # 2. Preparar Python
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # 3. Instalar dependencias del scraper
+      - run: pip install requests beautifulsoup4
+
+      # 4. Ejecutar el scraper (falla el job si el BCV no responde:
+      #    así el json conserva el valor anterior y el sitio usa fallback)
+      - name: Scrapear tasa del BCV
+        run: python scripts/scrape_bcv.py
+
+      # 5. Commit y push solo si algo cambió (bcv.json o config.js)
+      - name: Commit de la nueva tasa
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/bcv.json js/config.js
+          git diff --cached --quiet && echo "Sin cambios" || git commit -m "chore: tasa BCV actualizada [bot]"
+          git push

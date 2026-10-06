@@ -1,0 +1,1340 @@
+/* ==========================================================================
+   NOPTABÚ — HOJA DE ESTILOS PRINCIPAL
+   --------------------------------------------------------------------------
+   Paleta derivada del logo (magenta sobre negro):
+     --magenta:       #ff2d8f  (color primario del logo)
+     --magenta-osc:   #b3165f  (variante oscura para hovers/gradientes)
+     --magenta-claro: #ff7ab8  (acentos suaves)
+     --fondo:         #0d0d12  (negro casi puro del logo)
+     --tarjeta:       #16161e  (superficies elevadas)
+     --texto:         #f5f2f5  (blanco cálido)
+     --gris:          #a8a3ad  (texto secundario)
+   Tipografías: Playfair Display (títulos elegantes) + Inter (cuerpo legible)
+   Metodología: mobile-first, CSS Grid + Flexbox, custom properties.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. VARIABLES GLOBALES Y RESET
+   -------------------------------------------------------------------------- */
+:root {
+    /* Paleta de colores (derivada del logo, no modificar los valores del logo) */
+    --magenta: #ff2d8f;
+    --magenta-osc: #b3165f;
+    --magenta-claro: #ff7ab8;
+    --fondo: #0d0d12;
+    --fondo-suave: #12121a;
+    --tarjeta: #16161e;
+    --borde: #2a2a35;
+    --texto: #f5f2f5;
+    --gris: #a8a3ad;
+
+    /* Tipografías */
+    --fuente-titulo: "Playfair Display", Georgia, serif;
+    --fuente-cuerpo: "Inter", "Segoe UI", Arial, sans-serif;
+
+    /* Radios y sombras */
+    --radio: 14px;
+    --radio-chico: 8px;
+    --sombra: 0 10px 30px rgba(0, 0, 0, .45);
+    --sombra-magenta: 0 6px 24px rgba(255, 45, 143, .28);
+
+    /* Anchos y transiciones */
+    --ancho-max: 1200px;
+    --transicion: .25s ease;
+}
+
+/* Reset moderno y base */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: var(--fuente-cuerpo);
+    background: var(--fondo);
+    color: var(--texto);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* El main ocupa el espacio disponible para que el footer quede abajo */
+main { flex: 1; }
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+/* Utilidad para ocultar elementos */
+.oculto { display: none !important; }
+
+/* Foco visible y accesible para navegación por teclado */
+:focus-visible {
+    outline: 2px solid var(--magenta);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   2. CONTENEDOR, TIPOGRAFÍA BASE Y BOTONES
+   -------------------------------------------------------------------------- */
+
+/* Contenedor central reutilizable en todas las secciones */
+.contenedor {
+    width: min(100% - 2rem, var(--ancho-max));
+    margin-inline: auto;
+}
+
+/* Enlace de accesibilidad "saltar al contenido" (solo visible con foco) */
+.salto-contenido {
+    position: absolute;
+    left: -9999px;
+    top: 0;
+    background: var(--magenta);
+    color: #fff;
+    padding: .6rem 1rem;
+    z-index: 200;
+    border-radius: 0 0 var(--radio-chico) 0;
+}
+.salto-contenido:focus { left: 0; }
+
+/* Títulos de sección con pequeña etiqueta magenta superior */
+.titulo-seccion {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    margin-bottom: .4rem;
+}
+.subtitulo-seccion {
+    color: var(--gris);
+    max-width: 640px;
+    margin-bottom: 2rem;
+}
+
+/* Botón base: heredado por todas las variantes */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    font-family: var(--fuente-cuerpo);
+    font-size: .95rem;
+    font-weight: 600;
+    padding: .75rem 1.5rem;
+    border-radius: var(--radio-chico);
+    border: 1px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform var(--transicion), box-shadow var(--transicion),
+                background var(--transicion), border-color var(--transicion);
+}
+.btn:active { transform: scale(.97); }
+.btn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* Botón primario: fondo magenta con degradado hacia el magenta oscuro */
+.btn-primario {
+    background: linear-gradient(135deg, var(--magenta), var(--magenta-osc));
+    color: #fff;
+    box-shadow: var(--sombra-magenta);
+}
+.btn-primario:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(255, 45, 143, .4);
+}
+
+/* Botón secundario: contorno magenta sobre fondo oscuro */
+.btn-secundario {
+    background: transparent;
+    border-color: var(--magenta);
+    color: var(--magenta-claro);
+}
+.btn-secundario:hover {
+    background: rgba(255, 45, 143, .12);
+    transform: translateY(-2px);
+}
+
+/* Botón fantasma: sin borde, para acciones terciarias */
+.btn-fantasma {
+    background: transparent;
+    color: var(--gris);
+}
+.btn-fantasma:hover { color: var(--magenta-claro); }
+
+/* --------------------------------------------------------------------------
+   3. HEADER FIJO CON NAVEGACIÓN Y SELECTORES
+   -------------------------------------------------------------------------- */
+
+/* Cabecera fija con fondo oscuro semitransparente y desenfoque */
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13, 13, 18, .88);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--borde);
+}
+
+/* Barra interna: logo a la izquierda, nav y acciones a la derecha */
+.header-contenedor {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding-block: .6rem;
+}
+
+/* Logo: altura fija para consistencia entre páginas */
+.logo {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Lista de navegación horizontal en desktop */
+.nav-principal ul {
+    display: flex;
+    gap: .25rem;
+    list-style: none;
+    margin-left: auto;
+}
+.nav-principal a {
+    display: block;
+    padding: .5rem .8rem;
+    font-size: .9rem;
+    color: var(--gris);
+    text-decoration: none;
+    border-radius: var(--radio-chico);
+    transition: color var(--transicion), background var(--transicion);
+}
+.nav-principal a:hover { color: var(--texto); background: rgba(255,255,255,.05); }
+.nav-principal a.activo {
+    color: var(--magenta-claro);
+    background: rgba(255, 45, 143, .12);
+}
+
+/* Botón hamburguesa (solo visible en móvil) */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: 0;
+    cursor: pointer;
+    padding: .5rem;
+    margin-left: auto;
+}
+.menu-toggle span {
+    width: 24px;
+    height: 2px;
+    background: var(--texto);
+    border-radius: 2px;
+    transition: var(--transicion);
+}
+
+/* Grupo de acciones a la derecha: selectores + carrito */
+.acciones-header {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* Selectores de idioma y moneda, discretos y oscuros */
+.selector-header {
+    background: var(--tarjeta);
+    color: var(--gris);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    font-size: .8rem;
+    padding: .4rem .5rem;
+    cursor: pointer;
+}
+
+/* Botón del carrito con contador flotante */
+.btn-carrito {
+    position: relative;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    color: var(--texto);
+    padding: .45rem .7rem;
+    cursor: pointer;
+    transition: border-color var(--transicion);
+}
+.btn-carrito:hover { border-color: var(--magenta); }
+
+/* Contador de unidades en el carrito (círculo magenta) */
+.contador-carrito {
+    position: absolute;
+    top: -7px;
+    right: -7px;
+    background: var(--magenta);
+    color: #fff;
+    font-size: .68rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    padding: 0 4px;
+}
+/* Animación "pop" cuando se agrega un producto */
+@keyframes pop-carrito {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.25); }
+    100% { transform: scale(1); }
+}
+.btn-carrito.pop { animation: pop-carrito .35s ease; }
+
+/* --------------------------------------------------------------------------
+   4. HERO DE LA PÁGINA DE INICIO
+   -------------------------------------------------------------------------- */
+
+/* Hero: degradado sutil con resplandor magenta superior */
+.hero {
+    position: relative;
+    padding: clamp(3rem, 8vw, 6rem) 0;
+    overflow: hidden;
+    background:
+        radial-gradient(700px 320px at 80% -10%, rgba(255, 45, 143, .18), transparent 70%),
+        radial-gradient(500px 300px at 10% 110%, rgba(255, 45, 143, .1), transparent 70%);
+}
+
+/* Contenido del hero centrado con ancho limitado */
+.hero-contenido {
+    max-width: 720px;
+    text-align: center;
+    margin-inline: auto;
+}
+
+/* Etiqueta superior pequeña en magenta */
+.hero-etiqueta {
+    display: inline-block;
+    font-size: .78rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--magenta-claro);
+    border: 1px solid rgba(255, 45, 143, .4);
+    border-radius: 999px;
+    padding: .35rem 1rem;
+    margin-bottom: 1.4rem;
+}
+
+/* Titular grande y elegante del hero */
+.hero-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    line-height: 1.15;
+    font-weight: 800;
+    margin-bottom: 1.2rem;
+}
+/* Palabra destacada en magenta dentro del título */
+.hero-titulo em {
+    font-style: normal;
+    background: linear-gradient(120deg, var(--magenta), var(--magenta-claro));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.hero-subtitulo {
+    color: var(--gris);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    max-width: 560px;
+    margin: 0 auto 2rem;
+}
+
+/* Fila de botones de acción del hero */
+.hero-acciones {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .8rem;
+    justify-content: center;
+}
+
+/* --------------------------------------------------------------------------
+   5. SECCIONES DE INICIO: BENEFICIOS, DESTACADOS Y BANNER MAYORISTA
+   -------------------------------------------------------------------------- */
+
+/* Espaciado vertical estándar de cada sección */
+.seccion { padding: clamp(2.5rem, 6vw, 4.5rem) 0; }
+.seccion-fondo { background: var(--fondo-suave); }
+
+/* Cabecera de sección con título y subtítulo centrados */
+.cabecera-seccion { text-align: center; margin-bottom: 2.5rem; }
+.cabecera-seccion .subtitulo-seccion { margin-inline: auto; }
+
+/* Grid de beneficios: 1 columna en móvil, 4 en desktop */
+.beneficios-grid {
+    display: grid;
+    gap: 1.2rem;
+    grid-template-columns: 1fr;
+}
+
+/* Tarjeta de beneficio con ícono magenta */
+.beneficio {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 1.6rem 1.4rem;
+    transition: transform var(--transicion), border-color var(--transicion);
+}
+.beneficio:hover {
+    transform: translateY(-4px);
+    border-color: rgba(255, 45, 143, .5);
+}
+
+/* Ícono circular magenta de cada beneficio */
+.beneficio-icono {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 45, 143, .14);
+    color: var(--magenta);
+    margin-bottom: 1rem;
+}
+
+.beneficio h3 { font-size: 1.05rem; margin-bottom: .4rem; }
+.beneficio p { color: var(--gris); font-size: .9rem; }
+
+/* Banner mayorista: bloque llamativo con degradado magenta */
+.banner-mayoreo {
+    background: linear-gradient(120deg, var(--magenta-osc), var(--magenta));
+    border-radius: var(--radio);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    text-align: center;
+    box-shadow: var(--sombra-magenta);
+}
+.banner-mayoreo h2 {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin-bottom: .8rem;
+}
+.banner-mayoreo p {
+    max-width: 560px;
+    margin: 0 auto 1.6rem;
+    color: rgba(255, 255, 255, .9);
+}
+
+/* Botón blanco sobre el banner magenta */
+.btn-claro {
+    background: #fff;
+    color: var(--magenta-osc);
+    font-weight: 700;
+}
+.btn-claro:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,.25); }
+
+/* --------------------------------------------------------------------------
+   6. CABECERA INTERNA DE PÁGINAS (título + subtítulo)
+   -------------------------------------------------------------------------- */
+
+/* Hero interno compacto para páginas distintas al inicio */
+.pagina-hero {
+    padding: clamp(2.5rem, 6vw, 4rem) 0 1.5rem;
+    text-align: center;
+    background:
+        radial-gradient(600px 260px at 50% -30%, rgba(255, 45, 143, .16), transparent 70%);
+}
+.pagina-hero .subtitulo-seccion { margin-inline: auto; }
+
+/* --------------------------------------------------------------------------
+   7. CATÁLOGO: FILTROS, BUSCADOR Y GRID DE TARJETAS
+   -------------------------------------------------------------------------- */
+
+/* Barra de herramientas del catálogo (buscador + filtros) */
+.catalogo-herramientas {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Campo de búsqueda con ícono y foco magenta */
+.buscador {
+    width: 100%;
+    max-width: 480px;
+    margin-inline: auto;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: 999px;
+    color: var(--texto);
+    font-size: .95rem;
+    padding: .8rem 1.4rem;
+    transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+.buscador::placeholder { color: var(--gris); }
+.buscador:focus {
+    outline: none;
+    border-color: var(--magenta);
+    box-shadow: 0 0 0 3px rgba(255, 45, 143, .2);
+}
+
+/* Fila de botones de filtro por categoría */
+.filtro-categorias {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    justify-content: center;
+}
+
+/* Botón de filtro individual (píldora) */
+.btn-filtro {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    color: var(--gris);
+    font-size: .85rem;
+    padding: .45rem 1.1rem;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: var(--transicion);
+}
+.btn-filtro:hover { color: var(--texto); border-color: var(--magenta); }
+
+/* Botón de filtro activo: fondo magenta */
+.btn-filtro.activo {
+    background: var(--magenta);
+    border-color: var(--magenta);
+    color: #fff;
+    font-weight: 600;
+}
+
+/* Grid de productos: 1 col móvil, 2 tablet, 3-4 desktop */
+.catalogo-grid {
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: 1fr;
+}
+
+/* Tarjeta individual de producto */
+.tarjeta-producto {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform var(--transicion), border-color var(--transicion),
+                box-shadow var(--transicion);
+    display: flex;
+    flex-direction: column;
+}
+.tarjeta-producto:hover {
+    transform: translateY(-5px);
+    border-color: rgba(255, 45, 143, .55);
+    box-shadow: var(--sombra);
+}
+/* Tarjetas de productos agotados: apagadas visualmente */
+.tarjeta-producto.agotado { opacity: .75; }
+.tarjeta-producto.agotado .tarjeta-imagen img { filter: grayscale(.7); }
+
+/* Contenedor de imagen con badges superpuestos */
+.tarjeta-imagen {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: var(--fondo-suave);
+}
+.tarjeta-imagen img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .5s ease;
+}
+.tarjeta-producto:hover .tarjeta-imagen img { transform: scale(1.06); }
+
+/* Badge de descuento (mayoreo), esquina superior izquierda */
+.badge-descuento {
+    position: absolute;
+    top: .8rem;
+    left: .8rem;
+    background: var(--magenta);
+    color: #fff;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: .25rem .6rem;
+    border-radius: 999px;
+    box-shadow: var(--sombra-magenta);
+}
+
+/* Badge de agotado, esquina superior derecha */
+.badge-agotado {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    background: rgba(13, 13, 18, .85);
+    border: 1px solid var(--borde);
+    color: var(--gris);
+    font-size: .72rem;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .25rem .6rem;
+    border-radius: 999px;
+}
+
+/* Cuerpo de la tarjeta: categoría, nombre y precios */
+.tarjeta-info {
+    padding: 1.1rem 1.1rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: .45rem;
+    flex: 1;
+}
+
+/* Categoría en mayúsculas pequeñas y magenta */
+.tarjeta-categoria {
+    font-size: .72rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--magenta-claro);
+}
+
+.tarjeta-nombre {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+/* Bloque de precios en dólares y bolívares */
+.tarjeta-precios {
+    display: flex;
+    flex-direction: column;
+    gap: .1rem;
+    margin-top: .2rem;
+}
+.precio-usd { font-size: 1.15rem; font-weight: 700; color: var(--texto); }
+.precio-ves { font-size: .85rem; color: var(--gris); }
+
+/* Reglas de moneda: según la preferencia se oculta un precio u otro */
+body.moneda-usd .precio-ves { display: none; }
+body.moneda-ves .precio-usd { display: none; }
+
+/* Botón agregar dentro de la tarjeta (ocupa el ancho y va al final) */
+.btn-agregar { margin-top: auto; width: 100%; }
+
+/* Mensaje de catálogo sin resultados */
+.catalogo-vacio {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: var(--gris);
+    padding: 3rem 1rem;
+    border: 1px dashed var(--borde);
+    border-radius: var(--radio);
+}
+
+/* --------------------------------------------------------------------------
+   8. PANEL LATERAL DEL CARRITO (drawer)
+   -------------------------------------------------------------------------- */
+
+/* Overlay oscuro compartido por carrito y modales */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .6);
+    backdrop-filter: blur(3px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transicion), visibility var(--transicion);
+    z-index: 150;
+}
+.overlay.visible { opacity: 1; visibility: visible; }
+
+/* Panel del carrito deslizable desde la derecha */
+.carrito-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100dvh;
+    width: min(420px, 92vw);
+    background: var(--fondo-suave);
+    border-left: 1px solid var(--borde);
+    z-index: 160;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    display: flex;
+    flex-direction: column;
+}
+.carrito-panel.abierto { transform: translateX(0); }
+
+/* Cabecera del panel con título y botón cerrar */
+.carrito-cabecera {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.1rem 1.2rem;
+    border-bottom: 1px solid var(--borde);
+}
+.carrito-cabecera h2 { font-size: 1.15rem; }
+
+/* Botón genérico de cerrar (✕) usado en paneles y modales */
+.btn-cerrar {
+    background: none;
+    border: 0;
+    color: var(--gris);
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    padding: .3rem .5rem;
+    border-radius: var(--radio-chico);
+    transition: color var(--transicion), background var(--transicion);
+}
+.btn-cerrar:hover { color: var(--texto); background: rgba(255,255,255,.06); }
+
+/* Contenedor con scroll de los ítems del carrito */
+.carrito-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Estado vacío del carrito, centrado con ícono */
+.carrito-vacio {
+    margin: auto;
+    text-align: center;
+    color: var(--gris);
+    display: grid;
+    gap: .8rem;
+    justify-items: center;
+}
+
+/* Fila individual de producto dentro del carrito */
+.carrito-item {
+    display: flex;
+    gap: .9rem;
+    align-items: flex-start;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    padding: .8rem;
+    position: relative;
+}
+.carrito-item img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: var(--radio-chico);
+    flex-shrink: 0;
+}
+.carrito-item-info { flex: 1; min-width: 0; }
+.carrito-item-info h4 { font-size: .9rem; line-height: 1.3; margin-bottom: .15rem; }
+.carrito-item-precio { font-size: .78rem; color: var(--gris); margin-bottom: .4rem; }
+
+/* Controles de cantidad (+/−) y subtotal de la fila */
+.carrito-item-controles {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+.btn-cantidad {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid var(--borde);
+    background: var(--fondo);
+    color: var(--texto);
+    cursor: pointer;
+    font-size: 1rem;
+    line-height: 1;
+    transition: border-color var(--transicion);
+}
+.btn-cantidad:hover { border-color: var(--magenta); }
+.carrito-cantidad { min-width: 20px; text-align: center; font-weight: 600; font-size: .9rem; }
+.carrito-subtotal { margin-left: auto; font-size: .88rem; font-weight: 700; color: var(--magenta-claro); }
+
+/* Botón quitar (✕) en la esquina de la fila */
+.btn-quitar {
+    position: absolute;
+    top: .4rem;
+    right: .4rem;
+    background: none;
+    border: 0;
+    color: var(--gris);
+    cursor: pointer;
+    font-size: .85rem;
+    padding: .2rem .35rem;
+    border-radius: 4px;
+    transition: color var(--transicion);
+}
+.btn-quitar:hover { color: var(--magenta); }
+
+/* Pie del panel: modo, totales y botones de acción */
+.carrito-pie {
+    border-top: 1px solid var(--borde);
+    padding: 1.1rem 1.2rem;
+    display: grid;
+    gap: .7rem;
+}
+.carrito-modo-fila {
+    display: flex;
+    justify-content: space-between;
+    font-size: .82rem;
+    color: var(--gris);
+}
+.carrito-modo-fila strong { color: var(--magenta-claro); }
+.carrito-totales { display: grid; gap: .15rem; }
+.carrito-totales .fila-total {
+    display: flex;
+    justify-content: space-between;
+    font-size: .95rem;
+}
+.carrito-totales .fila-total.grande { font-size: 1.1rem; font-weight: 700; }
+.carrito-totales .fila-total span:last-child { color: var(--magenta-claro); }
+.carrito-botones { display: flex; gap: .6rem; }
+.carrito-botones .btn { flex: 1; }
+
+/* --------------------------------------------------------------------------
+   9. MODALES (age-gate, checkout y vista rápida de producto)
+   -------------------------------------------------------------------------- */
+
+/* Contenedor base de modal centrado */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 170;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transicion), visibility var(--transicion);
+}
+.modal.visible { opacity: 1; visibility: visible; }
+
+/* Fondo oscuro propio del modal (el overlay global queda detrás) */
+.modal-fondo {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .7);
+    backdrop-filter: blur(4px);
+}
+
+/* Caja del modal con animación de entrada */
+.modal-caja {
+    position: relative;
+    background: var(--fondo-suave);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+    width: min(520px, 100%);
+    max-height: 90dvh;
+    overflow-y: auto;
+    padding: 2rem 1.6rem;
+    transform: translateY(16px) scale(.98);
+    transition: transform .3s ease;
+}
+.modal.visible .modal-caja { transform: translateY(0) scale(1); }
+
+/* Modal de producto: caja más ancha para imagen + datos */
+.modal-caja.grande { width: min(760px, 100%); }
+
+/* Centrado de contenido para modales tipo age-gate */
+.modal-centrado { text-align: center; }
+.modal-centrado .logo { margin: 0 auto 1.2rem; height: 56px; }
+
+.modal-caja h2 {
+    font-family: var(--fuente-titulo);
+    font-size: 1.5rem;
+    margin-bottom: .8rem;
+}
+.modal-caja p { color: var(--gris); font-size: .92rem; }
+
+/* Aviso legal pequeño bajo los botones del age-gate */
+.modal-aviso {
+    margin-top: 1.2rem;
+    font-size: .75rem !important;
+    color: var(--magenta-claro) !important;
+}
+
+/* Fila de botones del age-gate */
+.modal-botones {
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+    margin-top: 1.6rem;
+}
+
+/* Layout de dos columnas del modal de producto (imagen + info) */
+.producto-detalle {
+    display: grid;
+    gap: 1.4rem;
+    grid-template-columns: 1fr;
+}
+.producto-detalle img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: var(--radio-chico);
+    border: 1px solid var(--borde);
+}
+.producto-detalle-info { display: flex; flex-direction: column; gap: .7rem; }
+.producto-detalle-info h3 { font-size: 1.3rem; line-height: 1.3; }
+
+/* Selector de cantidad con botones −/+ del modal de producto */
+.cantidad-selector {
+    display: flex;
+    align-items: center;
+    gap: .8rem;
+    margin-top: .4rem;
+}
+.cantidad-selector input {
+    width: 56px;
+    text-align: center;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    color: var(--texto);
+    font-size: 1rem;
+    padding: .45rem;
+}
+.cantidad-selector input:focus { outline: none; border-color: var(--magenta); }
+
+/* --------------------------------------------------------------------------
+   10. FORMULARIOS (checkout y contacto)
+   -------------------------------------------------------------------------- */
+
+/* Grupo campo + etiqueta con espaciado uniforme */
+.campo { display: grid; gap: .35rem; margin-bottom: 1rem; }
+.campo label { font-size: .85rem; font-weight: 600; color: var(--texto); }
+
+/* Inputs y textareas con estilo oscuro y foco magenta */
+.campo input,
+.campo select,
+.campo textarea {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    color: var(--texto);
+    font-family: var(--fuente-cuerpo);
+    font-size: .95rem;
+    padding: .7rem .9rem;
+    width: 100%;
+    transition: border-color var(--transicion), box-shadow var(--transicion);
+}
+.campo textarea { resize: vertical; min-height: 90px; }
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline: none;
+    border-color: var(--magenta);
+    box-shadow: 0 0 0 3px rgba(255, 45, 143, .18);
+}
+
+/* Selects: flecha nativa en color gris para que combine */
+.campo select option { background: var(--tarjeta); color: var(--texto); }
+
+/* Resumen del pedido dentro del modal de checkout */
+.co-resumen {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio-chico);
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    display: grid;
+    gap: .45rem;
+    max-height: 180px;
+    overflow-y: auto;
+}
+.co-linea {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: .88rem;
+    color: var(--gris);
+}
+.co-linea span:last-child { color: var(--texto); white-space: nowrap; }
+
+/* Totales destacados al final del checkout */
+.co-totales {
+    display: grid;
+    gap: .3rem;
+    margin-bottom: 1.4rem;
+}
+.co-totales .fila {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+}
+.co-totales .fila.grande { font-size: 1.15rem; font-weight: 700; }
+.co-totales .fila span:last-child { color: var(--magenta-claro); }
+
+/* --------------------------------------------------------------------------
+   11. PÁGINAS DE CONTENIDO (pagos, envíos, privacidad, contacto)
+   -------------------------------------------------------------------------- */
+
+/* Lista de tarjetas de información (métodos de pago/envío) */
+.info-lista {
+    display: grid;
+    gap: 1.1rem;
+    grid-template-columns: 1fr;
+}
+
+/* Tarjeta de información con ícono a la izquierda */
+.info-tarjeta {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 1.4rem;
+    transition: border-color var(--transicion), transform var(--transicion);
+}
+.info-tarjeta:hover {
+    border-color: rgba(255, 45, 143, .5);
+    transform: translateY(-3px);
+}
+.info-tarjeta h3 { font-size: 1.05rem; margin-bottom: .3rem; }
+.info-tarjeta p { color: var(--gris); font-size: .9rem; }
+
+/* Ícono circular magenta compartido por tarjetas de información */
+.info-icono {
+    flex-shrink: 0;
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: rgba(255, 45, 143, .14);
+    color: var(--magenta);
+}
+
+/* Artículo de texto legal (privacidad): títulos y párrafos espaciados */
+.legal { max-width: 760px; margin-inline: auto; }
+.legal h2 { font-size: 1.15rem; margin: 1.8rem 0 .5rem; color: var(--magenta-claro); }
+.legal p { color: var(--gris); font-size: .95rem; }
+.legal .legal-fecha { font-size: .82rem; color: var(--magenta-claro); margin-bottom: .5rem; }
+
+/* Grid de contacto: formulario a la izquierda, datos a la derecha */
+.contacto-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    align-items: start;
+}
+
+/* Tarjeta del formulario de contacto */
+.contacto-formulario {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 1.6rem;
+}
+
+/* Tarjeta lateral con datos de contacto */
+.contacto-info {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    padding: 1.6rem;
+    display: grid;
+    gap: 1.2rem;
+}
+.contacto-info h2 { font-size: 1.1rem; margin-bottom: .2rem; }
+.contacto-dato { display: flex; gap: .9rem; align-items: center; }
+.contacto-dato strong { display: block; font-size: .8rem; color: var(--gris); font-weight: 500; }
+.contacto-dato a, .contacto-dato span.valor { font-size: .95rem; }
+.contacto-dato a:hover { color: var(--magenta-claro); }
+
+/* --------------------------------------------------------------------------
+   13. TOAST (aviso breve inferior)
+   -------------------------------------------------------------------------- */
+
+/* Barrita de aviso que aparece abajo al centro */
+.toast {
+    position: fixed;
+    bottom: 1.4rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--tarjeta);
+    border: 1px solid var(--magenta);
+    color: var(--texto);
+    font-size: .88rem;
+    padding: .7rem 1.3rem;
+    border-radius: 999px;
+    box-shadow: var(--sombra);
+    opacity: 0;
+    visibility: hidden;
+    transition: var(--transicion);
+    z-index: 180;
+    max-width: 90vw;
+    text-align: center;
+}
+.toast.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   14. FOOTER
+   -------------------------------------------------------------------------- */
+
+/* Pie de página con fondo ligeramente distinto */
+.footer {
+    background: var(--fondo-suave);
+    border-top: 1px solid var(--borde);
+    margin-top: 3rem;
+    /* aire inferior para que el botón flotante no tape el contenido */
+    padding: 2.5rem 0 6rem;
+}
+
+/* Grid del footer: marca + enlaces + contacto + BCV */
+.footer-grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: 1fr;
+    margin-bottom: 2rem;
+}
+.footer-col h3 {
+    font-size: .95rem;
+    margin-bottom: .8rem;
+    color: var(--magenta-claro);
+}
+.footer-col ul { list-style: none; display: grid; gap: .45rem; }
+.footer-col a {
+    color: var(--gris);
+    text-decoration: none;
+    font-size: .9rem;
+    transition: color var(--transicion);
+}
+.footer-col a:hover { color: var(--magenta-claro); }
+.footer-col p { color: var(--gris); font-size: .9rem; }
+
+/* Logo dentro del footer, ligeramente más grande */
+.footer .logo { height: 52px; margin-bottom: .8rem; }
+
+/* Bloque de la tasa BCV dentro del footer */
+.footer-bcv {
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
+    border-left: 3px solid var(--magenta);
+    border-radius: var(--radio-chico);
+    padding: 1rem 1.2rem;
+    font-size: .85rem;
+}
+.footer-bcv strong { color: var(--magenta-claro); }
+.footer-bcv span { color: var(--gris); display: block; font-size: .78rem; margin-top: .15rem; }
+
+/* Línea final del footer con copyright */
+.footer-final {
+    border-top: 1px solid var(--borde);
+    padding-top: 1.2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .6rem;
+    justify-content: space-between;
+    color: var(--gris);
+    font-size: .8rem;
+}
+
+/* --------------------------------------------------------------------------
+   15. PÁGINA 404
+   -------------------------------------------------------------------------- */
+
+/* Contenido centrado de la página de error */
+.pagina-error {
+    text-align: center;
+    padding: clamp(4rem, 12vw, 8rem) 1rem;
+}
+.pagina-error h1 {
+    font-family: var(--fuente-titulo);
+    font-size: clamp(4rem, 14vw, 8rem);
+    background: linear-gradient(120deg, var(--magenta), var(--magenta-claro));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    line-height: 1;
+}
+.pagina-error p { color: var(--gris); margin: 1rem 0 2rem; }
+
+/* --------------------------------------------------------------------------
+   16. MEDIA QUERIES — RESPONSIVE (mobile-first: se amplía hacia arriba)
+   -------------------------------------------------------------------------- */
+
+/* Teléfonos grandes (≥480px): beneficios en 2 columnas */
+@media (min-width: 480px) {
+    .beneficios-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tablets (≥640px): catálogo en 2 columnas, botones de modales en fila */
+@media (min-width: 640px) {
+    .catalogo-grid { grid-template-columns: repeat(2, 1fr); }
+    .modal-botones { flex-direction: row; justify-content: center; }
+    .info-lista { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Tablets grandes / portátiles pequeños (≥768px) */
+@media (min-width: 768px) {
+    .contacto-grid { grid-template-columns: 1.4fr 1fr; }
+    .producto-detalle { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1.3fr 1fr 1fr 1.4fr; }
+}
+
+/* Desktop (≥1024px): catálogo en 3 columnas, beneficios en 4 */
+@media (min-width: 1024px) {
+    .catalogo-grid { grid-template-columns: repeat(3, 1fr); }
+    .beneficios-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Desktop grande (≥1280px): catálogo en 4 columnas */
+@media (min-width: 1280px) {
+    .catalogo-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* Móvil (≤767px): mostrar hamburguesa y ocultar nav horizontal */
+@media (max-width: 767px) {
+    /* Mostrar el botón hamburguesa */
+    .menu-toggle { display: flex; }
+
+    /* Nav convertido en panel desplegable bajo el header */
+    .nav-principal {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--fondo-suave);
+        border-bottom: 1px solid var(--borde);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .3s ease;
+    }
+    .nav-principal ul {
+        flex-direction: column;
+        padding: .8rem 1rem 1.2rem;
+        gap: .15rem;
+    }
+    .nav-principal a { padding: .7rem .8rem; }
+
+    /* Al abrir el menú (body.nav-abierto) el panel crece */
+    body.nav-abierto .nav-principal { max-height: 420px; }
+
+    /* Selectores del header más compactos */
+    .selector-header { font-size: .72rem; padding: .35rem .4rem; }
+}
+
+/* --------------------------------------------------------------------------
+   17. ANIMACIÓN DE ENTRADA SUAVE PARA TARJETAS
+   -------------------------------------------------------------------------- */
+@keyframes aparecer {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.tarjeta-producto { animation: aparecer .45s ease backwards; }
+
+/* Respeta la preferencia del usuario de reducir animaciones */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+    }
+    html { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   18. REDES SOCIALES EN EL FOOTER (agregado)
+   ========================================================================== */
+
+/* Fila de íconos sociales debajo de los datos de contacto */
+.social-iconos {
+    display: flex;
+    gap: .6rem;
+    margin-top: .9rem;
+}
+
+/* Ícono circular individual (Instagram / TikTok) */
+.social-icono {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid var(--borde);
+    color: var(--gris);
+    transition: color var(--transicion), border-color var(--transicion),
+                transform var(--transicion);
+}
+.social-icono:hover {
+    color: var(--magenta);
+    border-color: var(--magenta);
+    transform: translateY(-2px);
+}
+
+
+/* ==========================================================================
+   BOTÓN FLOTANTE DE WHATSAPP (restaurado — siempre visible)
+   ========================================================================== */
+.btn-whatsapp {
+    position: fixed;
+    bottom: calc(1.2rem + env(safe-area-inset-bottom, 0px));
+    right: calc(1.2rem + env(safe-area-inset-right, 0px));
+    z-index: 999;  /* por encima de overlays (150), carrito (160) y modales (170) */
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    background: #25d366;
+    color: #fff;
+    font-weight: 700;
+    font-size: .9rem;
+    text-decoration: none;
+    padding: .8rem 1rem;
+    border-radius: 999px;
+    box-shadow: 0 8px 24px rgba(37, 211, 102, .4);
+    transition: transform var(--transicion), box-shadow var(--transicion),
+                opacity var(--transicion);
+}
+.btn-whatsapp:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, .5);
+}
+@keyframes pulso-wa {
+    0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, .45); }
+    70% { box-shadow: 0 0 0 16px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+.btn-whatsapp::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    animation: pulso-wa 2.4s infinite;
+    pointer-events: none;
+}
+.btn-whatsapp svg { flex-shrink: 0; }
+
+/* Móvil: solo ícono (sin texto) y footer con más aire */
+@media (max-width: 767px) {
+    .btn-whatsapp .wa-texto { display: none; }
+    .btn-whatsapp { padding: .8rem; }
+    .footer { padding-bottom: 6.5rem; }
+}
+
+/* Se retira suavemente SOLO mientras el carrito o el checkout están abiertos */
+body.carrito-abierto .btn-whatsapp,
+body.checkout-abierto .btn-whatsapp {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(1rem) scale(.8);
+}
+
+/* ==========================================================================
+   ESTILO DEL INPUT NUMBER (cantidad en el modal de producto)
+   Oculta las flechitas nativas del navegador y unifica el aspecto
+   ========================================================================== */
+.cantidad-selector input[type="number"] {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+.cantidad-selector input[type="number"]::-webkit-outer-spin-button,
+.cantidad-selector input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

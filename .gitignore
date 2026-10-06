@@ -1,0 +1,10 @@
+# Entorno virtual local (nunca se sube al repo)
+.venv/
+venv/
+
+# Basura de Python
+__pycache__/
+*.pyc
+
+# Copias de seguridad locales
+data/bcv_backup*.json
