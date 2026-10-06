@@ -1,8 +1,9 @@
 # =============================================================================
 # WORKFLOW: Actualización diaria de la tasa BCV
 # -----------------------------------------------------------------------------
-# GitHub Actions corre este scraping en el servidor de GitHub (sin CORS),
-# actualiza data/bcv.json y hace commit al repo. El sitio (100% estático)
+# GitHub Actions corre este scraping 2 veces al dia (9 AM y 5 PM, hora
+# Venezuela) en el servidor de GitHub (sin CORS), actualiza data/bcv.json
+# y hace commit al repo. El sitio (100% estático)
 # solo lee ese archivo. También se puede disparar manualmente desde la
 # pestaña "Actions" del repositorio.
 # =============================================================================
@@ -10,7 +11,9 @@ name: Actualizar tasa BCV
 
 on:
   schedule:
-    - cron: "0 12 * * *"      # 12:00 UTC = 8:00 AM (hora Venezuela, UTC-4)
+    # 2 veces al dia, hora Venezuela (UTC-4):
+    - cron: "0 13 * * *"      # 13:00 UTC = 9:00 AM
+    - cron: "0 21 * * *"      # 21:00 UTC = 5:00 PM
   workflow_dispatch:          # Ejecución manual opcional
 
 permissions:
