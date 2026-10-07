@@ -34,8 +34,8 @@ const CONFIG = {
        El precio del JSON (precio_venta_numero) es la BASE:
          precio_ves = rateB x precio_base
          precio_usd = precio_ves / tasa BCV del dia
-       Ejemplo con rateB 990 y BCV 872,39: base 15 -> Bs 14.850,00 -> $ 17,02 */
-    rateB: 990,
+       Ejemplo con rateB 1090 y BCV 872,39: base 15 -> Bs 16.350,00 -> $ 18,74 */
+    rateB: 1090,
 
     /* Descuento aplicado al catalogo de MAYOREO (0.20 = 20%).
        Se descuenta del precio en bolivares (equivale a la base) */
