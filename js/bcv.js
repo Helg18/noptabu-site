@@ -35,13 +35,14 @@ const BCV = {
             const antiguedadHoras = (Date.now() - new Date(datos.fecha + "T12:00:00")) / 36e5;
             this.esRespaldo = antiguedadHoras > 48;
 
-            this.tasa = tasa;
+            /* Truncar a 2 decimales SIN redondear (872.3927 -> 872.39) */
+            this.tasa = Math.floor(tasa * 100) / 100;
             /* La fecha se muestra tal cual venga; si es vieja, se indica */
             this.fecha = datos.fecha || "";
         } catch (error) {
             /* Cualquier problema ? usar la tasa de respaldo del config */
             console.warn("[BCV] Usando tasa de respaldo:", error.message);
-            this.tasa = parseFloat(CONFIG.tasaBcvFallback) || 0;
+            this.tasa = Math.floor((parseFloat(CONFIG.tasaBcvFallback) || 0) * 100) / 100;
             this.fecha = new Date().toISOString().slice(0, 10);
             this.esRespaldo = true;
         }

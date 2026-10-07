@@ -119,6 +119,12 @@ El sitio **nunca** se rompe.
 
 ---
 
+## 🛠️ Gestionar el catálogo con NOPTABÚ Admin
+
+Herramienta local (repo privado) para crear/editar productos en tiempo real:
+importa el `products.json`, edita sin modales, exporta de vuelta y nombra las
+fotos automáticamente (`fotos/<slug>-1.png`…). Ver su README propio.
+
 ## 🧸 Agregar / editar productos — `data/products.json`
 
 Cada producto sigue el formato de Treinta Shops:

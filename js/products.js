@@ -23,7 +23,11 @@ const PRODUCTOS = {
 
         this.lista = crudos
             /* Solo productos visibles en el catalogo virtual */
-            .filter((p) => p.en_catalogo_virtual === "SI" && p.tipo_producto === "PRODUCTO")
+            /* Visibles: en catalogo, tipo PRODUCTO y NO eliminados
+               (el admin marca "eliminado": "SI" en vez de borrar) */
+            .filter((p) => p.en_catalogo_virtual === "SI"
+                && p.tipo_producto === "PRODUCTO"
+                && p.eliminado !== "SI")
             /* Normalizamos a un objeto uniforme y seguro */
             .map((p) => ({
                 id: p.id,

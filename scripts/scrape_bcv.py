@@ -12,6 +12,7 @@
 # =============================================================================
 import datetime
 import json
+import math
 import os
 import re
 import sys
@@ -102,7 +103,7 @@ def actualizar_fallback_config(tasa):
         contenido = f.read()
     nuevo, n = re.subn(
         r"(tasaBcvFallback\s*:\s*)[\d.]+",
-        lambda m: f"{m.group(1)}{round(tasa, 4)}",
+        lambda m: f"{m.group(1)}{truncar2(tasa)}",
         contenido,
     )
     if n != 1:
@@ -111,8 +112,14 @@ def actualizar_fallback_config(tasa):
         f.write(nuevo)
 
 
+def truncar2(tasa):
+    """Conserva solo 2 decimales SIN redondear: 872.3927 -> 872.39.
+    (Se corta, nunca se redondea: 872.399 seguiria siendo 872.39)"""
+    return math.floor(tasa * 100) / 100.0
+
+
 def main():
-    tasa = obtener_tasa()
+    tasa = truncar2(obtener_tasa())
     # Validacion de rango: la tasa BCV debe ser un valor plausible.
     # Si el parseo extrajera basura (pagina de error, mantenimiento, etc.),
     # esto lo detecta y NO toca bcv.json.
