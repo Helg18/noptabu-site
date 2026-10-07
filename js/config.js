@@ -34,7 +34,7 @@ const CONFIG = {
        El precio del JSON (precio_venta_numero) es la BASE:
          precio_ves = rateB x precio_base
          precio_usd = precio_ves / tasa BCV del dia
-       Ejemplo con rateB 1090 y BCV 872,39: base 15 -> Bs 16.350,00 -> $ 18,74 */
+       Ejemplo con rateB 990 y BCV 872,39: base 15 -> Bs 14.850,00 -> $ 17,02 */
     rateB: 1090,
 
     /* Descuento aplicado al catalogo de MAYOREO (0.20 = 20%).
@@ -50,7 +50,7 @@ const CONFIG = {
     /* Tasa BCV de RESPALDO: se usa solo si data/bcv.json no existe,
        esta danado o es muy antiguo (p. ej. fallo la GitHub Action).
        Actualizala manualmente aqui si lo necesitas. */
-    tasaBcvFallback: 873.86,
+    tasaBcvFallback: 872.39,
 
     /* Edad minima para entrar al catalogo (no editar salvo cambio legal) */
     edadMinima: 18,

@@ -187,7 +187,9 @@
     "bcv_oficial": "Tasa oficial BCV",
     "bcv_respaldo": "Tasa de respaldo",
     "error_datos": "No se pudieron cargar los datos. Revisa tu conexión.",
-    "wa_modo": "Modo de compra"
+    "wa_modo": "Modo de compra",
+    "por_agotarse": "Por agotarse",
+    "badge_oferta": "Oferta"
   },
   "politicas": {
     "titulo": "Políticas",

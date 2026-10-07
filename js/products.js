@@ -49,6 +49,13 @@ const PRODUCTOS = {
                 /* Destacado: marca configurable (campoDestacado en config.js) */
                 destacado: p[CONFIG.campoDestacado || "destacado"] === "SI"
                     || p[CONFIG.campoDestacado || "destacado"] === true,
+                /* Nuevos campos del formato Treinta 2026 */
+                url: p.url || null,
+                stock_status: p.stock_status || "IN_STOCK",
+                oferta: p.oferta === "SI" ? "SI" : "NO",
+                creado_el: p.creado_el || null,
+                actualizado_el: p.actualizado_el || null,
+                eliminado_el: p.eliminado_el || null,
             }));
         return this.lista;
     },
@@ -58,7 +65,10 @@ const PRODUCTOS = {
      * ------------------------------------------------------------------ */
     elegirFoto(p) {
         if (Array.isArray(p.fotos) && p.fotos.length > 0 && p.fotos[0]) {
-            return p.fotos[0]; /* Ruta local, p. ej. "fotos/prod_01.png" */
+            /* Ruta local: acepta "fotos/x.png" o el nombre suelto "x.png"
+               (el export nuevo de Treinta trae solo el nombre de archivo) */
+            const ruta = p.fotos[0];
+            return ruta.includes("/") ? ruta : `fotos/${ruta}`;
         }
         if (CONFIG.fotosExternas !== false && Array.isArray(p.fotos_urls) && p.fotos_urls.length > 0) {
             return p.fotos_urls[0]; /* Respaldo: URL de AWS */

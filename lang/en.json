@@ -187,7 +187,9 @@
     "bcv_oficial": "Official BCV rate",
     "bcv_respaldo": "Fallback rate",
     "error_datos": "Could not load data. Check your connection.",
-    "wa_modo": "Purchase mode"
+    "wa_modo": "Purchase mode",
+    "por_agotarse": "Running out",
+    "badge_oferta": "Sale"
   },
   "politicas": {
     "titulo": "Policies",

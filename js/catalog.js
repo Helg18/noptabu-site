@@ -94,9 +94,15 @@ const CATALOGO = {
                 ? `<span class="badge-descuento">\u{2212}${Math.round(CONFIG.descuentoMayoreo * 100)}%</span>`
                 : "";
 
-            /* Badge de agotado (si aplica) */
-            const badgeAgotado = p.agotado
-                ? `<span class="badge-agotado">${t("js.agotado")}</span>` : "";
+            /* Badges de estado: agotado o por agotarse (stock_status LOW) */
+            const badgeStock = p.agotado
+                ? `<span class="badge-agotado">${t("js.agotado")}</span>`
+                : (p.stock_status === "LOW"
+                    ? `<span class="badge-low">${t("js.por_agotarse")}</span>` : "");
+
+            /* Badge de OFERTA (el admin marca "oferta": "SI") */
+            const badgeOferta = p.oferta === "SI"
+                ? `<span class="badge-oferta">${t("js.badge_oferta")}</span>` : "";
 
             return `
             <article class="tarjeta-producto ${p.agotado ? "agotado" : ""}"
@@ -105,7 +111,8 @@ const CATALOGO = {
                 <div class="tarjeta-imagen">
                     <img src="${p.foto}" alt="${escaparHtml(p.nombre)}" loading="lazy"
                          onerror="this.src='${PRODUCTOS.PLACEHOLDER}'">
-                    ${badgeDescuento}${badgeAgotado}
+                    <div class="tarjeta-badges-izq">${badgeDescuento}${badgeOferta}</div>
+                    ${badgeStock}
                 </div>
                 <div class="tarjeta-info">
                     <span class="tarjeta-categoria">${escaparHtml(p.categorias.join(" \u{B7} "))}</span>
