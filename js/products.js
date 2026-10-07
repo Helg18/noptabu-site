@@ -31,6 +31,7 @@ const PRODUCTOS = {
             /* Normalizamos a un objeto uniforme y seguro */
             .map((p) => ({
                 id: p.id,
+                codigo: p.codigo ? String(p.codigo) : null,
                 nombre: String(p.nombre || `Producto ${p.id}`).trim(),
                 /* Multi-categoria: admite array ["A","B"], string separado
                    por comas "A, B" o string simple. Siempre queda como array */

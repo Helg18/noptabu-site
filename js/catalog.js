@@ -56,9 +56,11 @@ const CATALOGO = {
             }
             if (this.textoBusqueda) {
                 const q = this.textoBusqueda.toLowerCase();
+                /* Busca por nombre, categorias, ID y codigo del producto */
                 lista = lista.filter((p) =>
                     p.nombre.toLowerCase().includes(q) ||
-                    p.categorias.join(" ").toLowerCase().includes(q));
+                    p.categorias.join(" ").toLowerCase().includes(q) ||
+                    String(p.codigo || "").toLowerCase().includes(q));
             }
         }
 
