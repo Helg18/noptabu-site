@@ -7,7 +7,8 @@
     "envios": "Shipping methods",
     "privacidad": "Privacy policy",
     "contacto": "Contact",
-    "politicas": "Policies"
+    "politicas": "Policies",
+    "terminos": "Terms and conditions"
   },
   "common": {
     "agregar_carrito": "Add to cart",
@@ -204,5 +205,34 @@
   "menores": {
     "s1_t": "10. Adults-only sales",
     "s1_x": "NOPTABÚ does not sell products to anyone under 18 years of age under any circumstances. By placing an order you declare that you are of legal age, and we reserve the right to request an identity document proving it before completing the delivery. Any order identified as placed by a minor will be cancelled immediately."
+  },
+  "terminos": {
+    "titulo": "Terms and conditions",
+    "subtitulo": "Conditions of use of the NOPTABÚ website and of purchase. By browsing and placing orders, you accept these terms.",
+    "actualizado": "Last updated: October 2026",
+    "s1_t": "1. Acceptance of the terms",
+    "s1_x": "By accessing and using the NOPTABÚ website you confirm that you have read, understood and accepted these Terms and Conditions together with our Privacy Policy. If you do not agree, please refrain from using the site.",
+    "s2_t": "2. Nature of the content and legal age",
+    "s2_x": "NOPTABÚ sells products intended exclusively for an adult audience. By using this site you declare that you are over 18 years of age under your own responsibility. We reserve the right to request an identity document before completing any delivery and to cancel orders that do not meet this requirement.",
+    "s3_t": "3. Prices, currencies and exchange rate",
+    "s3_x": "Prices are published in bolivars and in dollars. The bolivar price is calculated at the official Central Bank of Venezuela (BCV) rate of the day, published on our site, and the dollar price is derived from that conversion. Prices may change without notice according to rate variations. The total confirmed via WhatsApp at the time of your order is the governing value.",
+    "s4_t": "4. Ordering process",
+    "s4_x": "This site has no payment gateway and no cart with automatic charging. When you finish your selection, the order details are sent to our WhatsApp; the order is only confirmed when our team verifies it and confirms availability, total and payment method through that channel.",
+    "s5_t": "5. Payments",
+    "s5_x": "We accept Pago Móvil, bank transfers in bolivars or dollars, Zelle, USDT (TRC-20 network) and cash in dollars for store pickup. Payment details are shared only via WhatsApp once the order is confirmed. No order is processed without payment confirmation, except for special agreements made in writing.",
+    "s6_t": "6. Shipping and delivery",
+    "s6_x": "We ship in discreet, neutral packaging nationwide via MRW, Zoom and Tealca, and offer same-day delivery in Maracaibo and San Francisco upon coordination. Shipping costs and times are indicated when confirming the order. Risk of the goods passes to the customer upon handover to the courier agency or at the moment of receipt.",
+    "s7_t": "7. Exchanges and returns",
+    "s7_x": "Due to the intimate and hygienic nature of the products we sell and distribute, no exchanges, returns or refunds are accepted once the merchandise has been delivered, except for manufacturing defects reported within the first 24 hours after delivery with photo or video evidence. Before buying, our team answers any questions about sizes, materials, measurements and operation via WhatsApp.",
+    "s8_t": "8. Operation warranty",
+    "s8_x": "Every item is individually inspected and tested before being packed and shipped. If an electrical product arrives with factory defects despite that verification, we will assess it for replacement as stated in section 7 and under current regulations.",
+    "s9_t": "9. Wholesale purchases",
+    "s9_x": "Wholesale purchases are governed by the wholesale prices published in the corresponding catalog, subject to availability. Wholesale discounts may change without notice; the value confirmed via WhatsApp at the time of the order applies.",
+    "s10_t": "10. Intellectual property",
+    "s10_x": "All site content —logo, texts, photographs, design and code— is the property of NOPTABÚ or used with authorization. Reproduction in whole or in part for commercial purposes without express written consent is not permitted.",
+    "s11_t": "11. Changes",
+    "s11_x": "NOPTABÚ may update these terms at any time. The current version is the one published on this page with its update date; continued use of the site implies acceptance of the current version.",
+    "s12_t": "12. Contact",
+    "s12_x": "For any questions about these terms, write to us via WhatsApp, Instagram @noptabu or by email at noptabu@gmail.com. Hours: Monday to Saturday, 9:00 am – 6:00 pm."
   }
 }

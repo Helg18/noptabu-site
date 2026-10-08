@@ -4,12 +4,12 @@
 <!-- ===== HEAD: SEO, Open Graph, fuentes y hoja de estilos ===== -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOPTABÚ · Tienda para adultos | Juguetes, lencería y bienestar</title>
-    <meta name="description" content="Juguetes, lencería y productos de bienestar para adultos. Compra al detal o al mayoreo con envíos discretos en toda Venezuela. Precios en $ y Bs a tasa BCV.">
+    <title>Términos y condiciones · NOPTABÚ</title>
+    <meta name="description" content="Términos y condiciones de uso y compra en NOPTABÚ: mayores de 18 años, precios a tasa BCV, pedidos por WhatsApp, pagos, envíos y política de devoluciones.">
     <meta name="theme-color" content="#0d0d12">
     <!-- Open Graph para compartir en redes sociales -->
-    <meta property="og:title" content="NOPTABÚ · Tienda para adultos | Juguetes, lencería y bienestar">
-    <meta property="og:description" content="Juguetes, lencería y productos de bienestar para adultos. Compra al detal o al mayoreo con envíos discretos en toda Venezuela. Precios en $ y Bs a tasa BCV.">
+    <meta property="og:title" content="Métodos de envío · NOPTABÚ">
+    <meta property="og:description" content="Envíos discretos en toda Venezuela con MRW, Zoom y Tealca, delivery el mismo día en Maracaibo y San Francisco, y retiro en tienda. Empaque 100% neutro.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="assets/img/logo.jpeg">
     <meta name="twitter:card" content="summary_large_image">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <!-- data-agegate: esta página exige confirmar mayoría de edad al entrar -->
-<body data-page="inicio">
+<body data-page="terminos">
     <!-- Enlace de accesibilidad para lectores de pantalla -->
     <a href="#contenido" class="salto-contenido" data-i18n="common.skip"></a>
 
@@ -42,11 +42,11 @@
             <!-- Navegación principal -->
             <nav class="nav-principal" id="nav-principal" aria-label="Navegación principal">
                 <ul>
-                    <li><a href="index.html" class="activo" data-i18n="nav.inicio"></a></li>
+                    <li><a href="index.html" class="" data-i18n="nav.inicio"></a></li>
                     <li><a href="catalogo.html" class="" data-i18n="nav.catalogo"></a></li>
                     <li><a href="pagos.html" class="" data-i18n="nav.pagos"></a></li>
                     <li><a href="envios.html" class="" data-i18n="nav.envios"></a></li>
-                    <li><a href="politicas.html" class="" data-i18n="nav.politicas"></a></li>
+                    <li><a href="terminos.html" class="activo" data-i18n="nav.terminos"></a></li>
                     <li><a href="contacto.html" class="" data-i18n="nav.contacto"></a></li>
                 </ul>
             </nav>
@@ -75,75 +75,32 @@
 
     <!-- ===== CONTENIDO PRINCIPAL DE LA PÁGINA ===== -->
     <main id="contenido">
-        <!-- ===== HERO: presentación principal de la tienda ===== -->
-        <section class="hero">
-            <div class="contenedor hero-contenido">
-                <span class="hero-etiqueta" data-i18n="hero.etiqueta"></span>
-                <h1 class="hero-titulo" data-i18n-html="hero.titulo"></h1>
-                <p class="hero-subtitulo" data-i18n="hero.subtitulo"></p>
-                <div class="hero-acciones">
-                    <a href="catalogo.html" class="btn btn-primario" data-i18n="hero.cta_catalogo"></a>
-                </div>
-                <div class="hero-acciones" style="margin-top:.7rem">
-                    <a id="hero-whatsapp" href="#" target="_blank" rel="noopener" class="btn btn-fantasma" data-i18n="hero.cta_whatsapp"></a>
-                </div>
+        <!-- ===== HERO INTERNO: TÉRMINOS Y CONDICIONES ===== -->
+        <section class="pagina-hero">
+            <div class="contenedor">
+                <h1 class="titulo-seccion" data-i18n="terminos.titulo"></h1>
+                <p class="subtitulo-seccion" data-i18n="terminos.subtitulo"></p>
             </div>
         </section>
 
-        <!-- ===== DESTACADOS: los primeros 8 productos del catálogo ===== -->
-        <section class="seccion">
+        <!-- ===== TEXTO LEGAL COMPLETO ===== -->
+        <section class="seccion" style="padding-top:0">
             <div class="contenedor">
-                <div class="cabecera-seccion">
-                    <h2 class="titulo-seccion" data-i18n="home.destacados_titulo"></h2>
-                    <p class="subtitulo-seccion" data-i18n="home.destacados_sub"></p>
-                </div>
-                <!-- Grid pintado por js/catalog.js (modo detal, límite 8) -->
-                <div class="catalogo-grid" data-catalogo data-modo="detal" data-limite="config"></div>
-                <div style="text-align:center;margin-top:2.5rem">
-                    <a href="catalogo.html" class="btn btn-secundario" data-i18n="common.ver_todos"></a>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== BENEFICIOS: 4 razones para comprar ===== -->
-        <section class="seccion seccion-fondo">
-            <div class="contenedor">
-                <div class="cabecera-seccion">
-                    <h2 class="titulo-seccion" data-i18n="home.beneficios_titulo"></h2>
-                </div>
-                <div class="beneficios-grid">
-                    <article class="beneficio">
-                        <div class="beneficio-icono"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h11v8H3zM14 10h4l3 3v2h-7z"/><circle cx="7" cy="17" r="1.6"/><circle cx="17" cy="17" r="1.6"/></svg></div>
-                        <h3 data-i18n="home.b1_t"></h3>
-                        <p data-i18n="home.b1_x"></p>
-                    </article>
-                    <article class="beneficio">
-                        <div class="beneficio-icono"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2v20M17 6.5c0-2-2.2-3-5-3s-5 1-5 3 1.5 2.8 5 3.5 5 1.5 5 3.5-2.2 3-5 3-5-1-5-3"/></svg></div>
-                        <h3 data-i18n="home.b2_t"></h3>
-                        <p data-i18n="home.b2_x"></p>
-                    </article>
-                    <article class="beneficio">
-                        <div class="beneficio-icono"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 12a8 8 0 0 1-8 8H4l2-3a8 8 0 1 1 15-5z"/></svg></div>
-                        <h3 data-i18n="home.b3_t"></h3>
-                        <p data-i18n="home.b3_x"></p>
-                    </article>
-                    <article class="beneficio">
-                        <div class="beneficio-icono"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2l8 3v6c0 5-3.5 9.3-8 11-4.5-1.7-8-6-8-11V5z"/></svg></div>
-                        <h3 data-i18n="home.b4_t"></h3>
-                        <p data-i18n="home.b4_x"></p>
-                    </article>
-                </div>
-            </div>
-        </section>
-
-        <!-- ===== BANNER MAYORISTA: llamado al catálogo de mayoreo ===== -->
-        <section class="seccion">
-            <div class="contenedor">
-                <div class="banner-mayoreo">
-                    <h2 data-i18n="home.banner_mayoreo_titulo"></h2>
-                    <p data-i18n="home.banner_mayoreo_texto"></p>
-                    <a href="mayoreo.html" class="btn btn-claro" data-i18n="home.banner_mayoreo_cta"></a>
-                </div>
+                <article class="legal">
+                    <p class="legal-fecha" data-i18n="terminos.actualizado"></p>
+                    <h2 data-i18n="terminos.s1_t"></h2><p data-i18n="terminos.s1_x"></p>
+                    <h2 data-i18n="terminos.s2_t"></h2><p data-i18n="terminos.s2_x"></p>
+                    <h2 data-i18n="terminos.s3_t"></h2><p data-i18n="terminos.s3_x"></p>
+                    <h2 data-i18n="terminos.s4_t"></h2><p data-i18n="terminos.s4_x"></p>
+                    <h2 data-i18n="terminos.s5_t"></h2><p data-i18n="terminos.s5_x"></p>
+                    <h2 data-i18n="terminos.s6_t"></h2><p data-i18n="terminos.s6_x"></p>
+                    <h2 data-i18n="terminos.s7_t"></h2><p data-i18n="terminos.s7_x"></p>
+                    <h2 data-i18n="terminos.s8_t"></h2><p data-i18n="terminos.s8_x"></p>
+                    <h2 data-i18n="terminos.s9_t"></h2><p data-i18n="terminos.s9_x"></p>
+                    <h2 data-i18n="terminos.s10_t"></h2><p data-i18n="terminos.s10_x"></p>
+                    <h2 data-i18n="terminos.s11_t"></h2><p data-i18n="terminos.s11_x"></p>
+                    <h2 data-i18n="terminos.s12_t"></h2><p data-i18n="terminos.s12_x"></p>
+                </article>
             </div>
         </section>
     </main>
@@ -337,7 +294,6 @@
     <script src="js/bcv.js"></script>
     <script src="js/products.js"></script>
     <script src="js/cart.js"></script>
-    <script src="js/catalog.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

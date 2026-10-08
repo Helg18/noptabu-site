@@ -7,7 +7,8 @@
     "envios": "Métodos de envío",
     "privacidad": "Privacidad",
     "contacto": "Contacto",
-    "politicas": "Políticas"
+    "politicas": "Políticas",
+    "terminos": "Términos y condiciones"
   },
   "common": {
     "agregar_carrito": "Agregar al carrito",
@@ -204,5 +205,34 @@
   "menores": {
     "s1_t": "10. Venta exclusiva a mayores de edad",
     "s1_x": "NOPTABÚ no vende productos a menores de 18 años bajo ninguna circunstancia. Al realizar un pedido declaras ser mayor de edad, y nos reservamos el derecho de solicitar un documento de identidad que lo acredite antes de concretar la entrega. Cualquier pedido identificado como realizado por un menor será anulado de inmediato."
+  },
+  "terminos": {
+    "titulo": "Términos y condiciones",
+    "subtitulo": "Condiciones de uso del sitio y de compra en NOPTABÚ. Al navegar y realizar pedidos, aceptas estos términos.",
+    "actualizado": "Última actualización: octubre de 2026",
+    "s1_t": "1. Aceptación de los términos",
+    "s1_x": "Al acceder y usar el sitio web de NOPTABÚ confirmas que has leído, entendido y aceptado estos Términos y Condiciones junto con nuestras Políticas de Privacidad. Si no estás de acuerdo, por favor abstente de usar el sitio.",
+    "s2_t": "2. Naturaleza del contenido y mayoría de edad",
+    "s2_x": "NOPTABÚ vende productos destinados exclusivamente a un público adulto. Al usar este sitio declaras ser mayor de 18 años bajo tu responsabilidad. Nos reservamos el derecho de solicitar un documento de identidad antes de concretar cualquier entrega y de anular pedidos que no cumplan este requisito.",
+    "s3_t": "3. Precios, monedas y tasa de cambio",
+    "s3_x": "Los precios se publican en bolívares y en dólares. El precio en bolívares se calcula a la tasa oficial del Banco Central de Venezuela (BCV) del día, publicada en nuestro sitio, y el precio en dólares se deriva de esa conversión. Los precios pueden cambiar sin previo aviso según la variación de la tasa. El total confirmado por WhatsApp al momento de tu pedido es el valor que rige.",
+    "s4_t": "4. Proceso de pedidos",
+    "s4_x": "Este sitio no cuenta con pasarela de pago ni carrito de compra con cobro automático. Al finalizar tu selección, el detalle del pedido se envía a nuestro WhatsApp de atención; el pedido queda confirmado únicamente cuando nuestro equipo lo verifica, confirma disponibilidad, total y forma de pago por ese medio.",
+    "s5_t": "5. Pagos",
+    "s5_x": "Aceptamos pago móvil, transferencias bancarias en bolívares o dólares, Zelle, USDT (red TRC-20) y efectivo en dólares para retiro en tienda. Los datos de pago se comparten únicamente por WhatsApp una vez confirmado el pedido. Ningún pedido se procesa sin confirmación de pago, salvo acuerdos especiales acordados por escrito.",
+    "s6_t": "6. Envíos y entregas",
+    "s6_x": "Realizamos envíos en empaque discreto y neutro a todo el territorio nacional mediante MRW, Zoom y Tealca, y entregas el mismo día en Maracaibo y San Francisco previa coordinación. Los costos y tiempos de envío se indican al confirmar el pedido. El riesgo de la mercancía pasa al cliente desde la entrega a la agencia o al momento de la recepción.",
+    "s7_t": "7. Cambios y devoluciones",
+    "s7_x": "Por la naturaleza íntima e higiénica de los productos que vendemos y distribuimos, no se aceptan cambios, devoluciones ni reembolsos una vez entregada la mercancía, salvo defectos de fabricación reportados dentro de las primeras 24 horas posteriores a la entrega con soporte fotográfico o en video. Antes de comprar, nuestro equipo resuelve por WhatsApp cualquier duda sobre tallas, materiales, medidas y funcionamiento.",
+    "s8_t": "8. Garantía de funcionamiento",
+    "s8_x": "Cada artículo se revisa y prueba individualmente antes de ser empacado y enviado. Si un producto eléctrico llega con defectos de fábrica pese a esa verificación, lo evaluaremos para reposición conforme a lo indicado en el punto 7 y a la normativa vigente.",
+    "s9_t": "9. Compras al mayor",
+    "s9_x": "Las compras al mayoreo se rigen por los precios mayoristas publicados en el catálogo correspondiente, sujetos a disponibilidad. Los descuentos mayoristas pueden modificarse sin previo aviso; el valor confirmado por WhatsApp al momento del pedido es el que aplica.",
+    "s10_t": "10. Propiedad intelectual",
+    "s10_x": "Todos los contenidos del sitio —logotipo, textos, fotografías, diseño y código— son propiedad de NOPTABÚ o se usan con autorización. No está permitida su reproducción total o parcial con fines comerciales sin consentimiento expreso por escrito.",
+    "s11_t": "11. Modificaciones",
+    "s11_x": "NOPTABÚ puede actualizar estos términos en cualquier momento. La versión vigente es la publicada en esta página con su fecha de actualización; el uso continuado del sitio implica la aceptación de la versión vigente.",
+    "s12_t": "12. Contacto",
+    "s12_x": "Para cualquier consulta sobre estos términos escríbenos por WhatsApp, por Instagram @noptabu o al correo noptabu@gmail.com. Atención: lunes a sábado, 9:00 am – 6:00 pm."
   }
 }

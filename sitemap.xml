@@ -31,6 +31,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://helg18.github.io/noptabu-site/terminos.html</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
     <loc>https://helg18.github.io/noptabu-site/contacto.html</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
