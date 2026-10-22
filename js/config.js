@@ -50,7 +50,7 @@ const CONFIG = {
     /* Tasa BCV de RESPALDO: se usa solo si data/bcv.json no existe,
        esta danado o es muy antiguo (p. ej. fallo la GitHub Action).
        Actualizala manualmente aqui si lo necesitas. */
-    tasaBcvFallback: 884.74,
+    tasaBcvFallback: 886.22,
 
     /* Edad minima para entrar al catalogo (no editar salvo cambio legal) */
     edadMinima: 18,
