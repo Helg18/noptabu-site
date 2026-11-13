@@ -35,7 +35,7 @@ const CONFIG = {
          precio_ves = rateB x precio_base
          precio_usd = precio_ves / tasa BCV del dia
        Ejemplo con rateB 1090 y BCV 872,39: base 15 -> Bs 16.350,00 -> $ 18,74 */
-    rateB: 1090,
+    rateB: 1150,
 
     /* Descuento aplicado al catalogo de MAYOREO (0.20 = 20%).
        Se descuenta del precio en bolivares (equivale a la base) */
