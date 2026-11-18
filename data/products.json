@@ -4622,11 +4622,11 @@
     "impuestos": "",
     "en_catalogo_virtual": "SI",
     "tipo_producto": "PRODUCTO",
-    "stock_status": "LOW",
+    "stock_status": "NORMAL",
     "oferta": "NO",
     "destacado": "NO",
     "creado_el": "2024-09-14T15:59:25.000Z",
-    "actualizado_el": "2026-11-18T18:00:18.764Z",
+    "actualizado_el": "2026-11-18T21:25:18.807Z",
     "eliminado": "NO",
     "eliminado_el": null,
     "fotos": [
