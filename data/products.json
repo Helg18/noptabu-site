@@ -3919,7 +3919,8 @@
     "costo_compra_numero": 2.25,
     "categoria": [
       "Lubricantes",
-      "Anestecia",
+      "Anestesia",
+      "Anales",
       "Femenina",
       "Masculino",
       "Mixto"
@@ -4227,7 +4228,7 @@
     "categoria": [
       "Lubricantes",
       "Anales",
-      "Anestecia"
+      "Anestesia"
     ],
     "descripcion": "Lubricante anal con efecto analgesico y dilatador",
     "impuestos": "",
@@ -5459,7 +5460,7 @@
     "categoria": [
       "Anales",
       "Lubricantes",
-      "Anestecia"
+      "Anestesia"
     ],
     "descripcion": "",
     "impuestos": "",
@@ -5529,7 +5530,7 @@
     "costo_compra_numero": 0.85,
     "categoria": [
       "Anales",
-      "Anestecia",
+      "Anestesia",
       "Lubricantes"
     ],
     "descripcion": "",
