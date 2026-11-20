@@ -278,7 +278,7 @@
     "url": "https://web.treinta.co/inventory-oc/66626335-3439-5830-b738-323838333033",
     "codigo": "2302-009",
     "nombre": "Lenceria 7891",
-    "cantidad_disponible": 14,
+    "cantidad_disponible": 11,
     "cantidad_minima": 5,
     "precio_venta": "$ 15",
     "precio_venta_numero": 15,
@@ -8459,38 +8459,6 @@
     "eliminado_el": null,
     "fotos": [
       "fotos/lenceria-b7-1.jpg"
-    ],
-    "fotos_urls": []
-  },
-  {
-    "id": 243,
-    "id_treinta": null,
-    "url": null,
-    "codigo": "2611-035",
-    "nombre": "Lenceria B32 7891",
-    "cantidad_disponible": 11,
-    "cantidad_minima": null,
-    "precio_venta": "$ 15",
-    "precio_venta_numero": 15,
-    "costo_compra": "$ 5",
-    "costo_compra_numero": 5,
-    "categoria": [
-      "Femenina",
-      "Lenceria"
-    ],
-    "descripcion": "Talla Unica",
-    "impuestos": null,
-    "en_catalogo_virtual": "SI",
-    "tipo_producto": "PRODUCTO",
-    "stock_status": "NORMAL",
-    "oferta": "NO",
-    "destacado": "NO",
-    "creado_el": "2026-11-20T19:20:34.924Z",
-    "actualizado_el": "2026-11-20T19:21:55.688Z",
-    "eliminado": "NO",
-    "eliminado_el": null,
-    "fotos": [
-      "fotos/lenceria-b32-7891-1.jpg"
     ],
     "fotos_urls": []
   },
