@@ -190,7 +190,13 @@
     "error_datos": "Could not load data. Check your connection.",
     "wa_modo": "Purchase mode",
     "por_agotarse": "Running out",
-    "badge_oferta": "Sale"
+    "badge_oferta": "Sale",
+    "galeria_anterior": "Previous photo",
+    "galeria_siguiente": "Next photo",
+    "galeria_fotos": "Product photos",
+    "galeria_foto": "Photo",
+    "galeria_ver_foto": "View photo",
+    "galeria_de": "of"
   },
   "politicas": {
     "titulo": "Policies",

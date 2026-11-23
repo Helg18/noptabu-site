@@ -190,7 +190,13 @@
     "error_datos": "No se pudieron cargar los datos. Revisa tu conexión.",
     "wa_modo": "Modo de compra",
     "por_agotarse": "Por agotarse",
-    "badge_oferta": "Oferta"
+    "badge_oferta": "Oferta",
+    "galeria_anterior": "Foto anterior",
+    "galeria_siguiente": "Foto siguiente",
+    "galeria_fotos": "Fotos del producto",
+    "galeria_foto": "Foto",
+    "galeria_ver_foto": "Ver foto",
+    "galeria_de": "de"
   },
   "politicas": {
     "titulo": "Políticas",

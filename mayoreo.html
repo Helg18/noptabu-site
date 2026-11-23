@@ -7,12 +7,41 @@
     <title>Catálogo al mayoreo · NOPTABÚ</title>
     <meta name="description" content="Catálogo mayorista NOPTABÚ con 20% de descuento. Productos para adultos al por mayor para revendedores en Venezuela.">
     <meta name="theme-color" content="#0d0d12">
+    <link rel="canonical" href="https://noptabu.com/mayoreo.html">
     <!-- Open Graph para compartir en redes sociales -->
+    <meta property="og:site_name" content="NOPTABÚ">
+    <meta property="og:locale" content="es_VE">
     <meta property="og:title" content="Catálogo al mayoreo · NOPTABÚ">
     <meta property="og:description" content="Catálogo mayorista NOPTABÚ con 20% de descuento. Productos para adultos al por mayor para revendedores en Venezuela.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/img/logo.jpeg">
+    <meta property="og:url" content="https://noptabu.com/mayoreo.html">
+    <meta property="og:image" content="https://noptabu.com/assets/img/logo.jpeg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="NOPTABÚ">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Catálogo al mayoreo · NOPTABÚ">
+    <meta name="twitter:description" content="Catálogo mayorista NOPTABÚ con 20% de descuento. Productos para adultos al por mayor para revendedores en Venezuela.">
+    <meta name="twitter:image" content="https://noptabu.com/assets/img/logo.jpeg">
+    <!-- Datos estructurados de la página -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": "https://noptabu.com/mayoreo.html#webpage",
+      "url": "https://noptabu.com/mayoreo.html",
+      "name": "Catálogo al mayoreo · NOPTABÚ",
+      "description": "Catálogo mayorista NOPTABÚ con 20% de descuento. Productos para adultos al por mayor para revendedores en Venezuela.",
+      "inLanguage": "es-VE",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://noptabu.com/#website",
+        "url": "https://noptabu.com/",
+        "name": "NOPTABÚ"
+      }
+    }
+    </script>
     <!-- Favicon y manifest PWA -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="manifest" href="manifest.json">
@@ -260,7 +289,18 @@
         <div class="modal-caja grande">
             <button class="btn-cerrar" data-cerrar-modal aria-label="Cerrar">✕</button>
             <div class="producto-detalle">
-                <img id="mp-img" src="assets/img/placeholder-producto.svg" alt="">
+                <div class="galeria-producto">
+                    <div class="galeria-principal">
+                        <img id="mp-img" src="assets/img/placeholder-producto.svg" alt="">
+                        <button type="button" id="mp-prev" class="galeria-flecha galeria-prev"
+                                aria-label="Foto anterior" hidden>&#8249;</button>
+                        <button type="button" id="mp-next" class="galeria-flecha galeria-next"
+                                aria-label="Foto siguiente" hidden>&#8250;</button>
+                        <span id="mp-contador" class="galeria-contador" aria-live="polite" hidden></span>
+                    </div>
+                    <div id="mp-miniaturas" class="galeria-miniaturas" role="group"
+                         aria-label="Fotos del producto" hidden></div>
+                </div>
                 <div class="producto-detalle-info">
                     <span class="tarjeta-categoria" id="mp-categoria"></span>
                     <h3 id="mp-nombre"></h3>

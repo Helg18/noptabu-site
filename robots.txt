@@ -1,7 +1,7 @@
 # robots.txt de NOPTABÚ
-# Permite todo el sitio excepto la carpeta de datos (JSON internos)
+# Se permite todo el sitio: el catálogo se renderiza desde /data/*.json,
+# así que los rastreadores deben poder descargar esos archivos.
 User-agent: *
 Allow: /
-Disallow: /data/
 
 Sitemap: https://noptabu.com/sitemap.xml

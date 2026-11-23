@@ -7,12 +7,66 @@
     <title>NOPTABÚ · Tienda para adultos | Juguetes, lencería y bienestar</title>
     <meta name="description" content="Juguetes, lencería y productos de bienestar para adultos. Compra al detal o al mayoreo con envíos discretos en toda Venezuela. Precios en $ y Bs a tasa BCV.">
     <meta name="theme-color" content="#0d0d12">
+    <link rel="canonical" href="https://noptabu.com/">
     <!-- Open Graph para compartir en redes sociales -->
+    <meta property="og:site_name" content="NOPTABÚ">
+    <meta property="og:locale" content="es_VE">
     <meta property="og:title" content="NOPTABÚ · Tienda para adultos | Juguetes, lencería y bienestar">
     <meta property="og:description" content="Juguetes, lencería y productos de bienestar para adultos. Compra al detal o al mayoreo con envíos discretos en toda Venezuela. Precios en $ y Bs a tasa BCV.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="assets/img/logo.jpeg">
+    <meta property="og:url" content="https://noptabu.com/">
+    <meta property="og:image" content="https://noptabu.com/assets/img/logo.jpeg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1080">
+    <meta property="og:image:height" content="1080">
+    <meta property="og:image:alt" content="NOPTABÚ">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NOPTABÚ · Tienda para adultos | Juguetes, lencería y bienestar">
+    <meta name="twitter:description" content="Juguetes, lencería y productos de bienestar para adultos. Compra al detal o al mayoreo con envíos discretos en toda Venezuela. Precios en $ y Bs a tasa BCV.">
+    <meta name="twitter:image" content="https://noptabu.com/assets/img/logo.jpeg">
+    <!-- Datos estructurados: negocio y sitio -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "OnlineStore",
+          "@id": "https://noptabu.com/#store",
+          "name": "NOPTABÚ",
+          "url": "https://noptabu.com/",
+          "description": "Tienda en línea de juguetes, lencería y productos de bienestar para adultos, con venta al detal y al mayoreo y envíos discretos en Venezuela.",
+          "image": "https://noptabu.com/assets/img/logo.jpeg",
+          "logo": "https://noptabu.com/assets/img/logo.jpeg",
+          "telephone": "+58 414 669 3604",
+          "email": "noptabu@gmail.com",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "San Francisco",
+            "addressRegion": "Zulia",
+            "addressCountry": "VE"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Venezuela"
+          },
+          "sameAs": [
+            "https://instagram.com/noptabu",
+            "https://tiktok.com/@noptabu1"
+          ],
+          "currenciesAccepted": "USD, VES",
+          "paymentAccepted": "Pago móvil, Transferencia bancaria, Zelle, USDT, Efectivo"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://noptabu.com/#website",
+          "url": "https://noptabu.com/",
+          "name": "NOPTABÚ",
+          "inLanguage": "es-VE",
+          "publisher": { "@id": "https://noptabu.com/#store" }
+        }
+      ]
+    }
+    </script>
     <!-- Favicon y manifest PWA -->
     <link rel="icon" type="image/png" href="assets/img/favicon.png">
     <link rel="manifest" href="manifest.json">
@@ -307,7 +361,18 @@
         <div class="modal-caja grande">
             <button class="btn-cerrar" data-cerrar-modal aria-label="Cerrar">✕</button>
             <div class="producto-detalle">
-                <img id="mp-img" src="assets/img/placeholder-producto.svg" alt="">
+                <div class="galeria-producto">
+                    <div class="galeria-principal">
+                        <img id="mp-img" src="assets/img/placeholder-producto.svg" alt="">
+                        <button type="button" id="mp-prev" class="galeria-flecha galeria-prev"
+                                aria-label="Foto anterior" hidden>&#8249;</button>
+                        <button type="button" id="mp-next" class="galeria-flecha galeria-next"
+                                aria-label="Foto siguiente" hidden>&#8250;</button>
+                        <span id="mp-contador" class="galeria-contador" aria-live="polite" hidden></span>
+                    </div>
+                    <div id="mp-miniaturas" class="galeria-miniaturas" role="group"
+                         aria-label="Fotos del producto" hidden></div>
+                </div>
                 <div class="producto-detalle-info">
                     <span class="tarjeta-categoria" id="mp-categoria"></span>
                     <h3 id="mp-nombre"></h3>
