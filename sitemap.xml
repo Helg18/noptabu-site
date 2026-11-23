@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://helg18.github.io/noptabu-site/index.html</loc>
+    <loc>https://noptabu.com/index</loc>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/catalogo.html</loc>
+    <loc>https://noptabu.com/catalogo</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/mayoreo.html</loc>
+    <loc>https:/noptabu.com/mayoreo</loc>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/pagos.html</loc>
+    <loc>https://noptabu.com/pagos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/envios.html</loc>
+    <loc>https://noptabu.com/envios</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/politicas.html</loc>
+    <loc>https://noptabu.com/politicas</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/terminos.html</loc>
+    <loc>https://noptabu.com/terminos</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://helg18.github.io/noptabu-site/contacto.html</loc>
+    <loc>https://noptabu.com/contacto</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
