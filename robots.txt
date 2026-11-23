@@ -4,4 +4,4 @@ User-agent: *
 Allow: /
 Disallow: /data/
 
-Sitemap: https://helg18.github.io/noptabu-site/sitemap.xml
+Sitemap: https://noptabu.com/sitemap.xml
