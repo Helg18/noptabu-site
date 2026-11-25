@@ -16,7 +16,8 @@ noptabu-site/
 ├── mayoreo.html            # Catálogo al MAYOREO (−20% configurable, con age-gate)
 ├── pagos.html              # Métodos de pago
 ├── envios.html             # Métodos de envío
-├── politicas.html         # Políticas de privacidad
+├── politicas.html          # Políticas de privacidad
+├── terminos.html           # Términos y condiciones
 ├── contacto.html           # Contacto (formulario → WhatsApp)
 ├── 404.html                # Página no encontrada (GitHub Pages la usa sola)
 ├── robots.txt              # Indexación para buscadores
@@ -43,7 +44,7 @@ noptabu-site/
 ├── scripts/
 │   └── scrape_bcv.py       # Scraper de la tasa del BCV
 └── .github/workflows/
-    └── bcv-scrape.yml      # GitHub Action: scraping diario a las 8 AM (VE)
+    └── bcv-scrape.yml      # GitHub Action: scraping 3 veces al día (VE)
 ```
 
 ---
@@ -57,20 +58,40 @@ noptabu-site/
 4. Guarda. En 1–2 minutos tu sitio estará en:
    `https://TU-USUARIO.github.io/noptabu-site/`
 5. **Importante:** el sitio carga JSON con `fetch()`, que exige HTTPS o
-   `localhost`. Si lo pruebas localmente, usa un servidor, por ejemplo:
+   `localhost`. Si lo pruebas localmente, usa **el servidor incluido**:
    ```bash
    cd noptabu-site
-   python -m http.server 8080
-   # Abre http://localhost:8080
+   python3 servidor_local.py          # http://localhost:8080
+   python3 servidor_local.py 8090     # u otro puerto
    ```
    (Abrir `index.html` con doble clic NO funcionará por las políticas CORS.)
 
-   **Mejor aún**, usa el servidor incluido (igual que `http.server` pero con tu
-   `404.html` personalizada para rutas inexistentes, como GitHub Pages):
+   > ⚠️ **No uses `python3 -m http.server`.** Ese servidor solo entrega rutas
+   > que coincidan con un archivo real, así que `/catalogo` devuelve **404**
+   > (aunque en GitHub Pages sí funciona). `servidor_local.py` resuelve las
+   > URLs limpias y además sirve tu `404.html` personalizada, igual que
+   > producción.
 
-   ```bash
-   python servidor_local.py        # http://localhost:8080
-   ```
+### URLs limpias (sin `.html`)
+
+GitHub Pages sirve `catalogo.html` también en `/catalogo`. El sitio usa esas
+rutas limpias en los enlaces internos, el canonical y el sitemap. Los archivos
+del repositorio siguen llamándose `.html`; no hay que renombrar nada.
+
+En local, `servidor_local.py` hace la misma resolución:
+
+| URL en el navegador | Archivo servido |
+|---|---|
+| `/` | `index.html` |
+| `/catalogo` | `catalogo.html` |
+| `/catalogo/` | redirige 301 a `/catalogo` |
+| `/mayoreo` | `mayoreo.html` |
+| `/pagos`, `/envios`, `/politicas`, `/terminos`, `/contacto` | su `.html` |
+| cualquier otra ruta | `404.html` con estado 404 |
+
+Opcional: si quieres que `https://noptabu.com/catalogo.html` redirija a
+`/catalogo`, crea una **Redirect Rule 301** en Cloudflare. No es obligatorio,
+porque el canonical ya indica cuál es la URL preferida.
 
 ---
 
@@ -84,11 +105,12 @@ Todo lo que necesitas cambiar día a día está en **un solo archivo**:
 | `whatsappMensaje` | Mensaje inicial del chat | `"Hola NOPTABÚ…"` |
 | `mostrarAgotados` | Muestra/oculta los agotados en los catálogos | `false` (ocultos) |
 | `campoDestacado` | Campo del JSON que marca destacados | `"destacado"` |
+| `destacadosLimite` | Cuántos destacados muestra el inicio (se eligen al azar entre los marcados) | `8` |
 | `descuentoMayoreo` | Descuento del catálogo mayorista (0.20 = 20%) | `0.20` |
 | `monedaDefault` | `usd` · `ves` · `both` | `both` |
 | `idiomaDefault` | `es` · `en` | `es` |
-| `rateB` | **Nueva lógica:** Bs = `precio_venta_numero × rateB`; USD = Bs ÷ tasa BCV | `990` |
-| `tasaBcvFallback` | Tasa usada solo si `data/bcv.json` falla o es viejo | `872.3927` |
+| `rateB` | **Nueva lógica:** Bs = `precio_venta_numero × rateB`; USD = Bs ÷ tasa BCV | `1150` |
+| `tasaBcvFallback` | Tasa usada solo si `data/bcv.json` falla o es viejo | `919.82` |
 
 > ✏️ **Cambia el número de WhatsApp SOLO aquí.** Los enlaces del footer,
 > contacto y hero se sincronizan automáticamente al cargar la página.
@@ -98,8 +120,8 @@ Todo lo que necesitas cambiar día a día está en **un solo archivo**:
 ## 🏦 Tasa BCV automática (GitHub Action)
 
 El navegador **no puede** scrapear bcv.org.ve (bloqueo CORS). La solución:
-un workflow de GitHub Actions que corre **en el servidor de GitHub** a las
-**8:00 AM (hora Venezuela)** todos los días:
+un workflow de GitHub Actions que corre **en el servidor de GitHub** tres
+veces al día, hora Venezuela: **9:00 AM, 1:00 PM y 5:00 PM**:
 
 - Ejecuta `scripts/scrape_bcv.py` (requests + BeautifulSoup).
 - Actualiza `data/bcv.json` con la tasa y la fecha.
@@ -200,8 +222,9 @@ tasa BCV del día:
 
 ## 🔞 Modal de mayoría de edad
 
-`catalogo.html` y `mayoreo.html` tienen `data-agegate` en el `<body>`.
-Al entrar se muestra el modal (una vez por sesión, `sessionStorage`).
+`index.html`, `catalogo.html` y `mayoreo.html` tienen `data-agegate` en el
+`<body>`. Al entrar se muestra el modal **una vez por sesión** de navegación
+(`sessionStorage`), así que no vuelve a aparecer al cambiar entre esas páginas.
 Edita los textos en `lang/*.json` → sección `agegate`.
 
 ---
@@ -211,9 +234,11 @@ Edita los textos en `lang/*.json` → sección `agegate`.
 1. El cliente agrega productos al carrito (persistente en su navegador).
 2. "Finalizar pedido" abre el resumen con totales en $ y Bs.
 3. Completa nombre, teléfono, método de entrega (retiro/envío) y notas.
-4. "Enviar pedido por WhatsApp" abre `wa.me` con un mensaje organizado:
-   artículos, cantidades, subtotales, totales, tasa BCV del día y datos
-   de entrega. Tú confirmas pago y envío por el chat.
+   Si elige envío a domicilio, la dirección es obligatoria.
+4. "Enviar pedido por WhatsApp" abre `api.whatsapp.com` (no `wa.me`, para
+   conservar los emojis en Firefox) con un mensaje organizado: artículos,
+   cantidades, subtotales, totales, tasa BCV del día y datos de entrega.
+   Tú confirmas pago y envío por el chat.
 
 ---
 
@@ -230,8 +255,9 @@ está derivada del logo de NOPTABÚ. Tipografías: **Playfair Display**
 
 - [ ] Cambiar `whatsapp` en `js/config.js` (número real)
 - [ ] Cambiar `noptabu@gmail.com` en `contacto.html` y `footer` (o buscar y reemplazar)
-- [ ] Reemplazar `TUDOMINIO` en `robots.txt` y `sitemap.xml` por tu dominio
+- [ ] Verificar que el dominio y `CNAME` apunten a `noptabu.com`
 - [ ] Revisar textos de pagos/envíos/privacidad con tus datos reales
 - [ ] Sustituir `data/products.json` y las fotos de `fotos/` por el catálogo real
 - [ ] Probar la GitHub Action del BCV en la pestaña Actions
 - [ ] Probar el flujo completo de compra hasta el mensaje de WhatsApp
+- [ ] Comprobar `/catalogo`, `/mayoreo` y `/pagos` sin `.html` en producción

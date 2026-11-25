@@ -1436,8 +1436,8 @@ body.checkout-abierto .btn-whatsapp {
     margin: 0;
 }
 
-/* ---------- BADGES: OFERTA y POR AGOTARSE ---------- */
-/* Contenedor izquierdo de badges (descuento mayoreo + oferta, apilados) */
+/* ---------- BADGES: DESCUENTO MAYOREO y POR AGOTARSE ---------- */
+/* Contenedor izquierdo de badges (descuento mayoreo, apilados) */
 .tarjeta-badges-izq {
     position: absolute;
     top: .8rem;
@@ -1446,19 +1446,6 @@ body.checkout-abierto .btn-whatsapp {
     flex-direction: column;
     gap: .35rem;
     align-items: flex-start;
-}
-
-/* Badge OFERTA: magenta solido, llama la atencion */
-.badge-oferta {
-    background: linear-gradient(135deg, var(--magenta), var(--magenta-osc));
-    color: #fff;
-    font-size: .72rem;
-    font-weight: 800;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    padding: .28rem .7rem;
-    border-radius: 999px;
-    box-shadow: var(--sombra-magenta);
 }
 
 /* Badge POR AGOTARSE: ambar de advertencia */

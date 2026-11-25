@@ -23,22 +23,42 @@ const CATALOGO = {
     galeriaNombre: "",
     galeriaConectada: false,
 
+    /* Producto abierto en la vista rápida (para re-traducir el modal) */
+    productoActual: null,
+
+    /* Selección aleatoria de destacados, estable durante la sesión */
+    _destacadosCache: null,
+
+    /* Evita registrar dos veces el listener de idioma */
+    idiomaConectado: false,
+
     /* ------------------------------------------------------------------
      * init() ? Renderiza cada contenedor de catalogo encontrado
      * ------------------------------------------------------------------ */
     init() {
         document.querySelectorAll("[data-catalogo]").forEach((contenedor) => {
-            const modo = contenedor.dataset.modo || "detal";
-            const limite = contenedor.dataset.limite
-                ? (contenedor.dataset.limite === "config"
-                    ? CONFIG.destacadosLimite          /* valor de config.js */
-                    : parseInt(contenedor.dataset.limite))
-                : null;
-            this.pintar(contenedor, modo, limite);
+            this.pintar(contenedor, contenedor.dataset.modo || "detal",
+                this.limiteDe(contenedor));
         });
         this.conectarFiltros();
         this.conectarBusqueda();
         this.conectarVistaRapida();
+
+        /* Al cambiar ES/EN hay que repintar tarjetas, filtros y modal:
+           los textos generados por JS no se actualizan solos */
+        if (!this.idiomaConectado) {
+            this.idiomaConectado = true;
+            document.addEventListener("idioma:cambiado", () => this.alCambiarIdioma());
+        }
+    },
+
+    /* ------------------------------------------------------------------
+     * limiteDe(contenedor) ? Lee data-limite ("config" o numero)
+     * ------------------------------------------------------------------ */
+    limiteDe(contenedor) {
+        if (!contenedor.dataset.limite) return null;
+        if (contenedor.dataset.limite === "config") return CONFIG.destacadosLimite;
+        return parseInt(contenedor.dataset.limite, 10) || null;
     },
 
     /* ------------------------------------------------------------------
@@ -71,11 +91,12 @@ const CATALOGO = {
         }
 
         /* Destacados del inicio: solo los marcados como destacados.
+           Se eligen al azar una vez por sesión para dar variedad.
            Si ninguno tiene la marca, respaldo: los primeros N del JSON */
         if (limite) {
             const destacados = lista.filter((p) => p.destacado);
             lista = destacados.length > 0
-                ? destacados.slice(0, limite)
+                ? this.destacadosAleatorios(destacados, limite)
                 : lista.slice(0, limite);
         }
 
@@ -106,10 +127,6 @@ const CATALOGO = {
                 : (p.stock_status === "LOW"
                     ? `<span class="badge-low">${t("js.por_agotarse")}</span>` : "");
 
-            /* Badge de OFERTA (el admin marca "oferta": "SI") */
-            const badgeOferta = p.oferta === "SI"
-                ? `<span class="badge-oferta">${t("js.badge_oferta")}</span>` : "";
-
             return `
             <article class="tarjeta-producto ${p.agotado ? "agotado" : ""}"
                      data-id="${p.id}" data-modo="${modo}" tabindex="0"
@@ -117,7 +134,7 @@ const CATALOGO = {
                 <div class="tarjeta-imagen">
                     <img src="${p.foto}" alt="${escaparHtml(p.nombre)}" loading="lazy"
                          onerror="this.src='${PRODUCTOS.PLACEHOLDER}'">
-                    <div class="tarjeta-badges-izq">${badgeDescuento}${badgeOferta}</div>
+                    <div class="tarjeta-badges-izq">${badgeDescuento}</div>
                     ${badgeStock}
                 </div>
                 <div class="tarjeta-info">
@@ -139,6 +156,28 @@ const CATALOGO = {
     },
 
     /* ------------------------------------------------------------------
+     * destacadosAleatorios(lista, limite) ? Elige destacados al azar.
+     * La selección se guarda durante la sesión para que no cambie al
+     * filtrar, buscar o cambiar de idioma.
+     * ------------------------------------------------------------------ */
+    destacadosAleatorios(lista, limite) {
+        if (!this._destacadosCache) {
+            const copia = [...lista];
+            /* Barajado Fisher-Yates */
+            for (let i = copia.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [copia[i], copia[j]] = [copia[j], copia[i]];
+            }
+            this._destacadosCache = copia
+                .slice(0, limite)
+                .map((p) => p.id);
+        }
+        return this._destacadosCache
+            .map((id) => lista.find((p) => p.id === id))
+            .filter(Boolean);
+    },
+
+    /* ------------------------------------------------------------------
      * aplicarMoneda() ? Muestra/oculta precios segun la moneda elegida
      * ------------------------------------------------------------------ */
     aplicarMoneda() {
@@ -148,18 +187,29 @@ const CATALOGO = {
     },
 
     /* ------------------------------------------------------------------
+     * pintarFiltros() ? Dibuja los botones de categoria conservando estado
+     * ------------------------------------------------------------------ */
+    pintarFiltros() {
+        const contenedorFiltros = document.getElementById("filtro-categorias");
+        if (!contenedorFiltros) return;
+
+        const activoTodas = this.filtrosSeleccionados.size === 0 ? " activo" : "";
+        contenedorFiltros.innerHTML =
+            `<button class="btn-filtro${activoTodas}" data-cat="todas">${t("js.filtro_todas")}</button>`
+            + PRODUCTOS.categorias().map((cat) => {
+                const activo = this.filtrosSeleccionados.has(cat) ? " activo" : "";
+                return `<button class="btn-filtro${activo}" data-cat="${escaparHtml(cat)}">${escaparHtml(cat)}</button>`;
+            }).join("");
+    },
+
+    /* ------------------------------------------------------------------
      * conectarFiltros() ? Botones de categoria (paginas de catalogo)
      * ------------------------------------------------------------------ */
     conectarFiltros() {
         const contenedorFiltros = document.getElementById("filtro-categorias");
         if (!contenedorFiltros) return;
 
-        /* Boton "Todas" + uno por cada categoria existente */
-        contenedorFiltros.innerHTML =
-            `<button class="btn-filtro activo" data-cat="todas">${t("js.filtro_todas")}</button>`
-            + PRODUCTOS.categorias().map((cat) =>
-                `<button class="btn-filtro" data-cat="${escaparHtml(cat)}">${escaparHtml(cat)}</button>`
-            ).join("");
+        this.pintarFiltros();
 
         contenedorFiltros.addEventListener("click", (e) => {
             const boton = e.target.closest(".btn-filtro");
@@ -175,15 +225,7 @@ const CATALOGO = {
                 this.filtrosSeleccionados.add(cat);      /* sumar a la seleccion */
             }
 
-            /* Pintar el estado activo de cada boton ("Todas" solo si no
-               hay nada seleccionado) */
-            contenedorFiltros.querySelectorAll(".btn-filtro").forEach((b) => {
-                const c = b.dataset.cat;
-                b.classList.toggle("activo",
-                    c === "todas" ? this.filtrosSeleccionados.size === 0
-                                  : this.filtrosSeleccionados.has(c));
-            });
-
+            this.pintarFiltros();
             this.repintarCatalogos();
         });
     },
@@ -233,12 +275,14 @@ const CATALOGO = {
             this.abrirVistaRapida(Number(tarjeta.dataset.id), tarjeta.dataset.modo || "detal");
         });
 
-        /* Teclado: Enter en la tarjeta abre la vista rapida */
+        /* Teclado: Enter SOLO cuando la tarjeta misma tiene el foco.
+           Asi Enter sobre "Agregar al carrito" no abre tambien el modal */
         document.addEventListener("keydown", (e) => {
-            if (e.key === "Enter") {
-                const tarjeta = e.target.closest?.(".tarjeta-producto");
-                if (tarjeta) this.abrirVistaRapida(Number(tarjeta.dataset.id), tarjeta.dataset.modo || "detal");
-            }
+            if (e.key !== "Enter") return;
+            const tarjeta = e.target.closest?.(".tarjeta-producto");
+            if (!tarjeta || e.target !== tarjeta) return;
+            e.preventDefault();
+            this.abrirVistaRapida(Number(tarjeta.dataset.id), tarjeta.dataset.modo || "detal");
         });
 
         /* Controles de cantidad dentro de la vista rapida */
@@ -247,11 +291,13 @@ const CATALOGO = {
         const agregar = document.getElementById("mp-agregar");
         if (menos) menos.addEventListener("click", () => {
             const input = document.getElementById("mp-cantidad");
-            input.value = Math.max(1, parseInt(input.value) - 1);
+            input.value = Math.max(1, (parseInt(input.value, 10) || 1) - 1);
         });
         if (mas) mas.addEventListener("click", () => {
             const input = document.getElementById("mp-cantidad");
-            input.value = Math.min(CONFIG.cantidadMaxima, parseInt(input.value) + 1);
+            /* El maximo real es el stock disponible (o el tope del config) */
+            const maximo = parseInt(input.max, 10) || CONFIG.cantidadMaxima;
+            input.value = Math.min(maximo, (parseInt(input.value, 10) || 1) + 1);
         });
         if (agregar) agregar.addEventListener("click", () => {
             const id = Number(agregar.dataset.id);
@@ -320,9 +366,9 @@ const CATALOGO = {
     },
 
     /* ------------------------------------------------------------------
-     * iniciarGaleria(p) ? Prepara fotos y miniaturas para un producto
+     * iniciarGaleria(p, indice) ? Prepara fotos y miniaturas para un producto
      * ------------------------------------------------------------------ */
-    iniciarGaleria(p) {
+    iniciarGaleria(p, indice = 0) {
         this.galeriaFotos = (p.fotos && p.fotos.length > 0) ? p.fotos : [p.foto];
         this.galeriaIndice = 0;
         this.galeriaNombre = p.nombre;
@@ -369,7 +415,7 @@ const CATALOGO = {
         }
         if (contador) contador.hidden = !multi;
 
-        this.mostrarFoto(0);
+        this.mostrarFoto(indice);
     },
 
     /* ------------------------------------------------------------------
@@ -406,9 +452,11 @@ const CATALOGO = {
     fotoSiguiente() { this.mostrarFoto(this.galeriaIndice + 1); },
 
     /* ------------------------------------------------------------------
-     * abrirVistaRapida(id, modo) ? Rellena y muestra el modal de producto
+     * abrirVistaRapida(id, modo, opciones) ? Rellena y muestra el modal
+     * opciones: { indice, cantidad } para conservar la galería y la
+     * cantidad al cambiar de idioma.
      * ------------------------------------------------------------------ */
-    abrirVistaRapida(id, modo) {
+    abrirVistaRapida(id, modo, opciones = {}) {
         const p = PRODUCTOS.buscar(id);
         if (!p) return;
 
@@ -416,7 +464,8 @@ const CATALOGO = {
         const precioVes = BCV.precioVes(p.precioBase, modo);
         const precioUsd = BCV.precioUsd(precioVes);
 
-        this.iniciarGaleria(p);
+        this.productoActual = { id: p.id, modo };
+        this.iniciarGaleria(p, opciones.indice || 0);
         document.getElementById("mp-nombre").textContent = p.nombre;
         document.getElementById("mp-categoria").textContent = p.categorias.join(" \u{B7} ");
         document.getElementById("mp-descripcion").textContent =
@@ -424,7 +473,13 @@ const CATALOGO = {
         document.getElementById("mp-precio-usd").textContent = BCV.fmtUsd(precioUsd);
         document.getElementById("mp-precio-ves").textContent =
             BCV.fmtVes(precioVes);
-        document.getElementById("mp-cantidad").value = 1;
+
+        /* Cantidad limitada por stock real (y por el tope del config) */
+        const inputCantidad = document.getElementById("mp-cantidad");
+        const maximo = Math.max(1, Math.min(CONFIG.cantidadMaxima, p.stock));
+        inputCantidad.max = String(maximo);
+        inputCantidad.value = Math.min(
+            Math.max(1, parseInt(opciones.cantidad, 10) || 1), maximo);
 
         const btnAgregar = document.getElementById("mp-agregar");
         btnAgregar.dataset.id = p.id;
@@ -433,6 +488,28 @@ const CATALOGO = {
         btnAgregar.textContent = p.agotado ? t("js.agotado") : t("js.agregar_carrito");
 
         abrirModal("modal-producto");
+    },
+
+    /* ------------------------------------------------------------------
+     * alCambiarIdioma() ? Repinta todo lo generado por JS al cambiar ES/EN
+     * ------------------------------------------------------------------ */
+    alCambiarIdioma() {
+        /* Filtros y catalogos (incluye destacados) */
+        this.pintarFiltros();
+        document.querySelectorAll("[data-catalogo]").forEach((contenedor) => {
+            this.pintar(contenedor, contenedor.dataset.modo || "detal",
+                this.limiteDe(contenedor));
+        });
+
+        /* Vista rapida abierta: conserva producto, foto y cantidad */
+        const modal = document.getElementById("modal-producto");
+        if (modal && modal.classList.contains("visible") && this.productoActual) {
+            const input = document.getElementById("mp-cantidad");
+            this.abrirVistaRapida(this.productoActual.id, this.productoActual.modo, {
+                indice: this.galeriaIndice,
+                cantidad: parseInt(input?.value, 10) || 1,
+            });
+        }
     },
 };
 

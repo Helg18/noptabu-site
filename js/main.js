@@ -117,6 +117,14 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("[I18N] Fall\u{F3} la carga:", e);
     }
 
+    /* ---- B2.5. Age-gate: se muestra antes de pintar productos ----
+       sessionStorage lo recuerda durante toda la sesion de navegacion,
+       asi que solo aparece una vez aunque el usuario cambie de pagina.
+       Debe ir despues de I18N para que los textos ya esten traducidos. */
+    if (document.body.dataset.agegate !== undefined) {
+        initAgeGate();
+    }
+
     /* ---- B3. Productos: si falla, el sitio sigue vivo pero sin catalogo ---- */
     try {
         await PRODUCTOS.cargar();
@@ -135,7 +143,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     actualizarFooterBCV();
 
     /* ==================================================================
-     * BLOQUE C ? Selectores y modal de edad
+     * BLOQUE C ? Selectores de idioma y moneda
      * ================================================================== */
 
     /* ---- C1. Selector de idioma ---- */
@@ -157,11 +165,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             localStorage.setItem("noptabu_moneda", selectorMoneda.value);
             window.CATALOGO?.aplicarMoneda();
         });
-    }
-
-    /* ---- C3. Modal de mayoria de edad (solo paginas con data-agegate) ---- */
-    if (document.body.dataset.agegate !== undefined) {
-        initAgeGate();
     }
 });
 

@@ -78,7 +78,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <!-- data-agegate: esta página exige confirmar mayoría de edad al entrar -->
-<body data-page="inicio">
+<body data-page="inicio" data-agegate>
     <!-- Enlace de accesibilidad para lectores de pantalla -->
     <a href="#contenido" class="salto-contenido" data-i18n="common.skip"></a>
 
@@ -86,7 +86,7 @@
     <header class="header">
         <div class="contenedor header-contenedor">
             <!-- Logo oficial (no modificado, solo reubicado) -->
-            <a href="index.html" aria-label="Noptabu - Inicio">
+            <a href="./" aria-label="Noptabu - Inicio">
                 <img src="assets/img/logo.jpeg" alt="Noptabu" class="logo" width="180" height="44">
             </a>
             <!-- Botón hamburguesa (visible solo en móvil) -->
@@ -96,12 +96,12 @@
             <!-- Navegación principal -->
             <nav class="nav-principal" id="nav-principal" aria-label="Navegación principal">
                 <ul>
-                    <li><a href="index.html" class="activo" data-i18n="nav.inicio"></a></li>
-                    <li><a href="catalogo.html" class="" data-i18n="nav.catalogo"></a></li>
-                    <li><a href="pagos.html" class="" data-i18n="nav.pagos"></a></li>
-                    <li><a href="envios.html" class="" data-i18n="nav.envios"></a></li>
-                    <li><a href="politicas.html" class="" data-i18n="nav.politicas"></a></li>
-                    <li><a href="contacto.html" class="" data-i18n="nav.contacto"></a></li>
+                    <li><a href="./" class="activo" data-i18n="nav.inicio"></a></li>
+                    <li><a href="catalogo" class="" data-i18n="nav.catalogo"></a></li>
+                    <li><a href="pagos" class="" data-i18n="nav.pagos"></a></li>
+                    <li><a href="envios" class="" data-i18n="nav.envios"></a></li>
+                    <li><a href="politicas" class="" data-i18n="nav.politicas"></a></li>
+                    <li><a href="contacto" class="" data-i18n="nav.contacto"></a></li>
                 </ul>
             </nav>
             <!-- Acciones: selector de idioma, moneda y carrito -->
@@ -136,7 +136,7 @@
                 <h1 class="hero-titulo" data-i18n-html="hero.titulo"></h1>
                 <p class="hero-subtitulo" data-i18n="hero.subtitulo"></p>
                 <div class="hero-acciones">
-                    <a href="catalogo.html" class="btn btn-primario" data-i18n="hero.cta_catalogo"></a>
+                    <a href="catalogo" class="btn btn-primario" data-i18n="hero.cta_catalogo"></a>
                 </div>
                 <div class="hero-acciones" style="margin-top:.7rem">
                     <a id="hero-whatsapp" href="#" target="_blank" rel="noopener" class="btn btn-fantasma" data-i18n="hero.cta_whatsapp"></a>
@@ -154,7 +154,7 @@
                 <!-- Grid pintado por js/catalog.js (modo detal, límite 8) -->
                 <div class="catalogo-grid" data-catalogo data-modo="detal" data-limite="config"></div>
                 <div style="text-align:center;margin-top:2.5rem">
-                    <a href="catalogo.html" class="btn btn-secundario" data-i18n="common.ver_todos"></a>
+                    <a href="catalogo" class="btn btn-secundario" data-i18n="common.ver_todos"></a>
                 </div>
             </div>
         </section>
@@ -196,7 +196,7 @@
                 <div class="banner-mayoreo">
                     <h2 data-i18n="home.banner_mayoreo_titulo"></h2>
                     <p data-i18n="home.banner_mayoreo_texto"></p>
-                    <a href="mayoreo.html" class="btn btn-claro" data-i18n="home.banner_mayoreo_cta"></a>
+                    <a href="mayoreo" class="btn btn-claro" data-i18n="home.banner_mayoreo_cta"></a>
                 </div>
             </div>
         </section>
@@ -215,19 +215,19 @@
                 <div class="footer-col">
                     <h3 data-i18n="footer.enlaces"></h3>
                     <ul>
-                        <li><a href="catalogo.html" data-i18n="nav.catalogo"></a></li>
-                        <li><a href="mayoreo.html" data-i18n="nav.mayoreo"></a></li>
-                        <li><a href="pagos.html" data-i18n="nav.pagos"></a></li>
-                        <li><a href="envios.html" data-i18n="nav.envios"></a></li>
-                        <li><a href="politicas.html" data-i18n="nav.politicas"></a></li>
-                        <li><a href="terminos.html" data-i18n="nav.terminos"></a></li>
+                        <li><a href="catalogo" data-i18n="nav.catalogo"></a></li>
+                        <li><a href="mayoreo" data-i18n="nav.mayoreo"></a></li>
+                        <li><a href="pagos" data-i18n="nav.pagos"></a></li>
+                        <li><a href="envios" data-i18n="nav.envios"></a></li>
+                        <li><a href="politicas" data-i18n="nav.politicas"></a></li>
+                        <li><a href="terminos" data-i18n="nav.terminos"></a></li>
                     </ul>
                 </div>
                 <!-- Columna 3: contacto rápido -->
                 <div class="footer-col">
                     <h3 data-i18n="footer.contacto_t"></h3>
                     <ul>
-                        <li><a href="contacto.html" data-i18n="nav.contacto"></a></li>
+                        <li><a href="contacto" data-i18n="nav.contacto"></a></li>
                         <li><a href="mailto:noptabu@gmail.com">noptabu@gmail.com</a></li>
                         <li><a href="https://api.whatsapp.com/send?phone=584146693604" target="_blank" rel="noopener">WhatsApp</a></li>
                     </ul>
